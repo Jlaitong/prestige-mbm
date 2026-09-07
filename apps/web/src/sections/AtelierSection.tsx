@@ -29,21 +29,21 @@ const CURATED_OUTFITS: CuratedOutfit[] = [
     items: [
       {
         role: 'Camiseta 200 GSM',
-        name: 'Camiseta Hugo Boss Premium Negra',
+        name: 'Camiseta Boss Negra',
         imageUrl: 'https://cdn.catalog-store.link/c179cae6bb3bcb33d8619d1bc893df0f_photo.webp',
       },
       {
         role: 'Gorra Estructurada',
-        name: 'Gorra Bélica 777 Black Edition',
-        imageUrl: 'https://cdn.catalog-store.link/87c2445e998db4c3bf3efecadcb0f9f3_photo.webp',
+        name: 'Gorra Negra 777 Gamuza',
+        imageUrl: 'https://cdn.catalog-store.link/4209a77fbbf424f93d269f6a0f4eeec2_photo.webp',
       },
       {
         role: 'Relojería de Presencia',
-        name: 'Reloj Rolex Submariner Black Acero',
-        imageUrl: 'https://cdn.catalog-store.link/ca1cb03cfc4083a213ffba59345ee81c_photo.webp',
+        name: 'Reloj Rolex Rojo/Negro',
+        imageUrl: 'https://cdn.catalog-store.link/a0b07a5b0dbdcc5f458c285c49840202_photo.webp',
       },
     ],
-    price: 235000,
+    price: 280000,
     compareAtPrice: 420000,
   },
   {
@@ -51,52 +51,52 @@ const CURATED_OUTFITS: CuratedOutfit[] = [
     name: 'Outfit Street Minimal Bogotá',
     vibe: '🌆 Diario & Clima Frío',
     badge: 'ESTILO COTIDIANO',
-    description: 'Equilibrio perfecto para el día a día. Algodón de 200 GSM para clima bogotano con el toque insignia Goorin.',
+    description: 'Equilibrio perfecto para el día a día. Algodón de 200 GSM para clima bogotano.',
     items: [
       {
         role: 'Camiseta 200 GSM',
-        name: 'Camiseta Boss Estampada Blanca',
-        imageUrl: 'https://cdn.catalog-store.link/d5236b280145fcb64082cfefdf547225_photo.webp',
+        name: 'Camiseta Boss Azul',
+        imageUrl: 'https://cdn.catalog-store.link/76e9fc2b99b56a49956443e3169d2d72_photo.webp',
       },
       {
         role: 'Gorra Insignia',
-        name: 'Gorra Goorin Bros El Gallo',
-        imageUrl: 'https://cdn.catalog-store.link/5e3df5fe497c36a6cf49c490aeeec23d_photo.webp',
+        name: 'Gorra Goorin Caballo Negra',
+        imageUrl: 'https://cdn.catalog-store.link/991083adec48d4f98dea8447b5fc97b3_photo.webp',
       },
       {
         role: 'Relojería Acero',
-        name: 'Reloj Tommy Hilfiger Cronógrafo',
-        imageUrl: 'https://cdn.catalog-store.link/66fffc85a9bc0506c28f09d84693b499_photo.webp',
+        name: 'Reloj Tommy Hilfiger',
+        imageUrl: 'https://cdn.catalog-store.link/3f51e0fdfd7ddb0cca51138fe2c50c90_photo.webp',
       },
     ],
-    price: 210000,
+    price: 240000,
     compareAtPrice: 380000,
   },
   {
     id: 'belico-gold',
-    name: 'Outfit Gold Bélico 777',
+    name: 'Outfit White Luxe',
     vibe: '⚡ Presencia & Exclusividad',
     badge: 'EDICIÓN ESPECIAL',
-    description: 'Para quienes no negocian presencia. Acentos dorados en gorra 777 y reloj Submariner Gold.',
+    description: 'Elegancia pura en blanco marfil con contraste en acero dorado para una presencia limpia e imponente.',
     items: [
       {
         role: 'Camiseta 200 GSM',
-        name: 'Camiseta Carolina Herrera Luxe',
-        imageUrl: 'https://cdn.catalog-store.link/87c4f4219a12888998ad9527d7f7663e_photo.webp',
+        name: 'Camiseta Hugo Blanca',
+        imageUrl: 'https://cdn.catalog-store.link/0b0c3c81adac2059597ed8a6fbe38696_photo.webp',
       },
       {
         role: 'Gorra Bélica',
-        name: 'Gorra Bélica 777 Black Gold',
-        imageUrl: 'https://cdn.catalog-store.link/7aebe76aa23075b97669bcf2a7b8aeaa_photo.webp',
+        name: 'Gorra Cruces Doradas',
+        imageUrl: 'https://cdn.catalog-store.link/ddc326263f4615743b00fcb113f3ed0a_photo.webp',
       },
       {
-        role: 'Relojería Gold',
-        name: 'Reloj Rolex Submariner Black/Gold',
-        imageUrl: 'https://cdn.catalog-store.link/3cf7f7e91fb69ce3818e692a832fa65a_photo.webp',
+        role: 'Relojería',
+        name: 'Reloj Rolex Rojo/Negro',
+        imageUrl: 'https://cdn.catalog-store.link/a0b07a5b0dbdcc5f458c285c49840202_photo.webp',
       },
     ],
-    price: 245000,
-    compareAtPrice: 460000,
+    price: 210000,
+    compareAtPrice: 320000,
   },
 ];
 
@@ -142,7 +142,7 @@ export const AtelierSection: React.FC = () => {
 
   const handleAskStylistWhatsApp = () => {
     const whatsappPhone = import.meta.env.VITE_WHATSAPP_NUMBER || '573332874590';
-    const text = `*ASESORÍA ATELIER PRIVÉ — PRESTIGE MBM*%0A%0A` +
+    const text = `*ASESORÍA PRESTIGE IA — PRESTIGE MBM*%0A%0A` +
       `Hola, me interesa el conjunto: *${currentOutfit.name}* (${currentOutfit.vibe}).%0A` +
       `*Precio Especial:* $${currentOutfit.price.toLocaleString('es-CO')} COP%0A` +
       `¿Tienen las prendas disponibles para despachar en Bogotá?`;
@@ -161,11 +161,9 @@ export const AtelierSection: React.FC = () => {
                 Estilista Virtual • Recomendación Inteligente
               </span>
             </div>
-            <SplitText
-              text="ATELIER PRIVÉ: CREADOR DE OUTFITS"
-              as="h2"
-              className="font-brand font-black text-2xl sm:text-4xl md:text-5xl text-[#121212] uppercase tracking-tight"
-            />
+            <h2 className="font-brand font-black text-2xl sm:text-4xl md:text-5xl text-[#121212] uppercase tracking-tight">
+              CREADOR DE OUTFITS • PRESTIGE IA
+            </h2>
           </div>
 
           <button
@@ -232,7 +230,7 @@ export const AtelierSection: React.FC = () => {
                   <img
                     src={item.imageUrl}
                     alt={item.name}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-contain rounded-lg mix-blend-multiply"
                     loading="lazy"
                   />
                 </div>

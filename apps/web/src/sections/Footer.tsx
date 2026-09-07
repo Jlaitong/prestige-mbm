@@ -96,12 +96,9 @@ export const Footer: React.FC = () => {
             >
               Simulador de Ahorro
             </button>
-            <button
-              onClick={() => smoothScrollTo('#atelier')}
-              className="hover:text-white transition-colors"
-            >
-              Atelier Privé MBM
-            </button>
+            <a href="/#atelier" className="hover:text-white transition-colors">
+              Prestige IA
+            </a>
             <span className="text-[#555]">•</span>
             <span>Envíos 24H en Bogotá</span>
             <span>Pagos Nequi / PSE / Transferencia</span>

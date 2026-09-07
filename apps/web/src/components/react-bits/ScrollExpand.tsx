@@ -82,26 +82,24 @@ export const ScrollExpand: React.FC = () => {
     <div ref={containerRef} className="py-10 md:py-16 px-5 md:px-10 max-w-7xl mx-auto" id="story">
       <div
         ref={cardRef}
-        className="squircle-card p-6 sm:p-10 md:p-14 bg-[#0d0d0c] text-[#e8e8e6] border border-white/10 shadow-2xl relative overflow-hidden will-change-transform"
+        className="squircle-card p-6 sm:p-10 md:p-14 bg-white text-[#121212] border border-[rgba(18,18,18,0.08)] shadow-2xl relative overflow-hidden will-change-transform"
       >
         {/* Subtle Silk Gold/Sand Ambient Glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#b7b79e]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-black/5 rounded-full blur-2xl pointer-events-none" />
 
         {/* Section Eyebrow */}
         <div className="relative z-10 max-w-4xl">
-          <div className="inline-flex items-center gap-2 mb-3 px-3.5 py-1 rounded-full bg-white/5 border border-white/10">
+          <div className="inline-flex items-center gap-2 mb-3 px-3.5 py-1 rounded-full bg-black/5 border border-black/10">
             <Sparkles className="w-3.5 h-3.5 text-[#b7b79e]" />
             <span className="text-[10px] font-brand font-bold uppercase tracking-widest text-[#b7b79e]">
               MANIFIESTO TALLER PRESTIGE MBM • BOGOTÁ
             </span>
           </div>
 
-          <SplitText
-            text="ALTA PRESENCIA • CERO SOBRECOSTOS DE MALL"
-            as="h2"
-            className="font-brand font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter leading-tight text-white mb-8"
-          />
+          <h2 className="font-brand font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter leading-tight text-[#121212] mb-8">
+            ALTA PRESENCIA • CERO SOBRECOSTOS DE MALL
+          </h2>
 
           {/* Interactive 3-Pillar Switcher Chips */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
@@ -114,19 +112,19 @@ export const ScrollExpand: React.FC = () => {
                   onClick={() => setActiveTab(idx)}
                   className={`p-4 rounded-2xl text-left border transition-all duration-300 flex flex-col justify-between min-h-[90px] ${
                     isActive
-                      ? 'bg-white/15 border-[#b7b79e] shadow-lg scale-[1.02]'
-                      : 'bg-white/5 border-white/10 hover:bg-white/10'
+                      ? 'bg-black/5 border-[#b7b79e] shadow-lg scale-[1.02]'
+                      : 'bg-transparent border-black/10 hover:bg-black/[0.03]'
                   }`}
                   aria-pressed={isActive}
                 >
                   <div className="flex items-center justify-between w-full mb-2">
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-[#b7b79e]' : 'text-white/60'}`} />
-                    <span className="text-[9px] font-brand font-black uppercase tracking-wider text-white/50">
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-[#b7b79e]' : 'text-[#666]'}`} />
+                    <span className="text-[9px] font-brand font-black uppercase tracking-wider text-[#999]">
                       0{idx + 1}
                     </span>
                   </div>
                   <div>
-                    <span className="font-brand font-bold text-xs uppercase block text-white">
+                    <span className="font-brand font-bold text-xs uppercase block text-[#121212]">
                       {pillar.title}
                     </span>
                   </div>
@@ -136,41 +134,41 @@ export const ScrollExpand: React.FC = () => {
           </div>
 
           {/* Active Pillar Dynamic Display Deck */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-sm grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          <div className="p-6 sm:p-8 rounded-2xl bg-black/[0.02] border border-black/10 backdrop-blur-sm grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-7">
               <div className="inline-block px-3 py-1 rounded-md bg-[#b7b79e]/20 border border-[#b7b79e]/40 text-[#b7b79e] font-brand font-bold text-[10px] uppercase tracking-wider mb-2.5">
                 {current.badge}
               </div>
-              <h3 className="font-brand font-black text-2xl sm:text-3xl text-white mb-2 uppercase">
+              <h3 className="font-brand font-black text-2xl sm:text-3xl text-[#121212] mb-2 uppercase">
                 {current.title}
               </h3>
-              <p className="text-sm sm:text-base text-[#aaa] font-normal leading-relaxed">
+              <p className="text-sm sm:text-base text-[#555] font-normal leading-relaxed">
                 {current.desc}
               </p>
             </div>
 
             {/* Quick Stat Pill */}
-            <div className="md:col-span-5 p-5 rounded-xl bg-black/40 border border-white/10 flex flex-col justify-center items-center text-center">
-              <span className="text-[10px] font-brand font-bold uppercase tracking-wider text-[#777] mb-1">
+            <div className="md:col-span-5 p-5 rounded-xl bg-black/5 border border-black/10 flex flex-col justify-center items-center text-center">
+              <span className="text-[10px] font-brand font-bold uppercase tracking-wider text-[#666] mb-1">
                 {current.statLabel}
               </span>
               <span className="font-brand font-black text-2xl sm:text-3xl text-[#b7b79e] mb-1">
                 {current.statValue}
               </span>
-              <span className="text-[10px] font-brand font-bold uppercase text-white/70">
+              <span className="text-[10px] font-brand font-bold uppercase text-[#444]">
                 {current.highlight}
               </span>
             </div>
           </div>
 
           {/* Bottom Action */}
-          <div className="mt-8 flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-white/10">
+          <div className="mt-8 flex items-center justify-between flex-wrap gap-4 pt-4 border-t border-[rgba(18,18,18,0.08)]">
             <span className="text-xs text-[#888] font-brand font-medium">
               Hecho en Bogotá • Sin franquicias intermediarias
             </span>
             <button
               onClick={() => smoothScrollTo('#catalogo')}
-              className="inline-flex items-center gap-2 text-xs font-brand font-bold uppercase tracking-wider text-white hover:text-[#b7b79e] transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-brand font-bold uppercase tracking-wider text-[#121212] hover:text-[#b7b79e] transition-colors"
             >
               <span>Ver Prendas Disponibles</span>
               <ArrowDown className="w-3.5 h-3.5" />
@@ -180,7 +178,7 @@ export const ScrollExpand: React.FC = () => {
 
         {/* Subtle Watermark */}
         <div className="absolute right-3 bottom-2 opacity-5 pointer-events-none select-none">
-          <span className="font-brand font-black text-8xl md:text-9xl tracking-tighter text-white">
+          <span className="font-brand font-black text-8xl md:text-9xl tracking-tighter text-[#121212]">
             MBM
           </span>
         </div>

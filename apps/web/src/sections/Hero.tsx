@@ -42,13 +42,9 @@ export const Hero: React.FC = () => {
         {/* Left Column: Editorial Headline & Copy */}
         <div className="lg:col-span-7">
           <div className="hero-reveal mb-6">
-            <SplitText
-              text="ALTA PRESENCIA. ACTITUD CAPITALINA. EXCLUSIVIDAD PURA."
-              as="h1"
-              by="words"
-              stagger={0.06}
-              className="font-brand font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.92] tracking-tighter text-[#121212] uppercase"
-            />
+            <h1 className="font-brand font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.92] tracking-tighter text-[#121212] uppercase">
+              ALTA PRESENCIA. ACTITUD CAPITALINA. <span className="text-[#b7b79e]">EXCLUSIVIDAD PURA.</span>
+            </h1>
           </div>
 
           <p className="hero-sub-reveal text-[#444] text-base md:text-lg max-w-xl mb-8 font-normal leading-relaxed">

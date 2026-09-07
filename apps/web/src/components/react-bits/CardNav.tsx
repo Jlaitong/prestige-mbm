@@ -17,7 +17,7 @@ export const CardNav: React.FC = () => {
       icon: DollarSign,
     },
     {
-      title: 'Atelier Privé MBM',
+      title: 'Prestige IA',
       subtitle: 'Conjuntos coordinados',
       target: '#atelier',
       icon: Sparkles,

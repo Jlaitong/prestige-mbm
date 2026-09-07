@@ -84,7 +84,7 @@ export const Navbar: React.FC = () => {
             onClick={() => handleNavClick('#atelier')}
             className="font-brand font-bold text-xs uppercase tracking-wider text-[#121212] hover:opacity-70 transition-opacity"
           >
-            Atelier Privé
+            Prestige IA
           </button>
         </nav>
 
@@ -134,7 +134,7 @@ export const Navbar: React.FC = () => {
             onClick={() => handleNavClick('#atelier')}
             className="w-full text-left font-brand font-bold text-sm uppercase tracking-wider text-[#121212] py-2"
           >
-            Atelier Privé MBM
+            Prestige IA
           </button>
         </div>
       )}
