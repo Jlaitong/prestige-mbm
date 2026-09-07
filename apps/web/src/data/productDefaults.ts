@@ -1,36 +1,67 @@
 import { Product, AtelierLook, SavingsComparison } from '@prestige/types';
 
 export const DEFAULT_PRODUCTS: Product[] = [
+  // --- CAMISETAS ---
   {
-    id: 'prod-1',
-    slug: 'heavy-boxy-hoodie-ash',
-    name: 'Heavy Boxy Hoodie Ash',
-    description: 'Felpa pesada 200 GSM confeccionada con corte cuadrado boxy fit. Tonalidad ceniza con costuras reforzadas de taller.',
+    id: 'prod-cam-1',
+    slug: 'camiseta-hugo-blanca-xxl',
+    name: 'Camiseta Hugo Blanca Talla XXL',
+    description: 'Camiseta de algodón peinado prémium de alto gramaje con estampado frontal Hugo. Confección limpia y corte holgado contemporáneo.',
     details: [
-      'Felpa pesada de 200 GSM con textura prémium',
-      'Corte boxy estructurado de hombro caído',
-      'Capota doble sin cordones para estética limpia',
-      'Bolsillo frontal tipo canguro reforzado'
+      'Algodón peinado 200 GSM',
+      'Cuello cerrado en rib grueso anti-deformación',
+      'Estampado frontal de alta definición',
+      'Hombro caído con silueta boxy'
+    ],
+    densityGsm: 200,
+    price: 140000,
+    compareAtPrice: 220000,
+    badge: '200 GSM',
+    categorySlug: 'camisetas' as any,
+    images: [
+      {
+        id: 'img-cam-1',
+        url: 'https://cdn.catalog-store.link/0b0c3c81adac2059597ed8a6fbe38696_photo.webp',
+        altText: 'Camiseta Hugo Blanca Talla XXL — Prestige MBM',
+        isPrimary: true,
+        order: 0,
+      }
+    ],
+    variants: [
+      { id: 'var-cam-1-xxl', productId: 'prod-cam-1', size: 'XXL', color: 'Blanco', sku: 'PBM-HUGO-XXL', stock: 6 }
+    ],
+    isAvailable: true,
+    isFeatured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'prod-cam-2',
+    slug: 'camiseta-boss-azul-xxl',
+    name: 'Camiseta Boss Azul Talla XXL',
+    description: 'Camiseta Boss en tono azul petróleo intenso. Confección en algodón pesado con textura ultra suave y cuello cerrado.',
+    details: [
+      'Algodón pesado 200 GSM',
+      'Logotipo Boss frontal en relieve sutil',
+      'Tonalidad azul petróleo exclusivo',
+      'Costuras reforzadas en hombros y sisa'
     ],
     densityGsm: 200,
     price: 140000,
     compareAtPrice: 240000,
     badge: '200 GSM',
-    categorySlug: 'hoodies',
+    categorySlug: 'camisetas' as any,
     images: [
       {
-        id: 'img-1',
-        url: '/assets/products/hoodie-ash.svg',
-        altText: 'Heavy Boxy Hoodie Ash — PRESTIGE MBM Bogotá',
+        id: 'img-cam-2',
+        url: 'https://cdn.catalog-store.link/76e9fc2b99b56a49956443e3169d2d72_photo.webp',
+        altText: 'Camiseta Boss Azul Talla XXL — Prestige MBM',
         isPrimary: true,
         order: 0,
       }
     ],
     variants: [
-      { id: 'v-1-s', productId: 'prod-1', size: 'S', color: 'Ceniza', sku: 'PBM-HOOD-S', stock: 8 },
-      { id: 'v-1-m', productId: 'prod-1', size: 'M', color: 'Ceniza', sku: 'PBM-HOOD-M', stock: 12 },
-      { id: 'v-1-l', productId: 'prod-1', size: 'L', color: 'Ceniza', sku: 'PBM-HOOD-L', stock: 10 },
-      { id: 'v-1-xl', productId: 'prod-1', size: 'XL', color: 'Ceniza', sku: 'PBM-HOOD-XL', stock: 5 },
+      { id: 'var-cam-2-xxl', productId: 'prod-cam-2', size: 'XXL', color: 'Azul', sku: 'PBM-BOSS-AZUL-XXL', stock: 5 }
     ],
     isAvailable: true,
     isFeatured: true,
@@ -38,107 +69,366 @@ export const DEFAULT_PRODUCTS: Product[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    id: 'prod-2',
-    slug: 'boxy-tee-washed-black',
-    name: 'Boxy Tee Washed Black',
-    description: 'Algodón peinado 200 GSM con proceso de lavado reactivo oscuro. Cuello cerrado en rib grueso de 3.5 cm.',
+    id: 'prod-cam-3',
+    slug: 'camiseta-boss-negra-xl',
+    name: 'Camiseta Boss Negra Talla XL',
+    description: 'Pieza insignia en negro obsidian con tipografía Boss en microestampado. Estructura rígida que mantiene la presencia todo el día.',
     details: [
-      'Algodón 100% peinado nacional',
-      'Rib grueso en cuello que mantiene la forma',
-      'Silueta oversize con mangas amplias',
-      'Lavado reactivo que no destiñe'
+      'Algodón 200 GSM negro profundo',
+      'Corte boxy estructurado',
+      'Rib cerrado en cuello',
+      'Acabado antipilling'
     ],
     densityGsm: 200,
-    price: 89000,
-    compareAtPrice: 145000,
+    price: 140000,
+    compareAtPrice: 240000,
+    badge: 'PIEZA INSIGNIA',
+    categorySlug: 'camisetas' as any,
+    images: [
+      {
+        id: 'img-cam-3',
+        url: 'https://cdn.catalog-store.link/c179cae6bb3bcb33d8619d1bc893df0f_photo.webp',
+        altText: 'Camiseta Boss Negra Talla XL — Prestige MBM',
+        isPrimary: true,
+        order: 0,
+      }
+    ],
+    variants: [
+      { id: 'var-cam-3-xl', productId: 'prod-cam-3', size: 'XL', color: 'Negro Obsidian', sku: 'PBM-BOSS-NEG-XL', stock: 8 }
+    ],
+    isAvailable: true,
+    isFeatured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'prod-cam-4',
+    slug: 'camiseta-carolina-herrera-blanca-xl',
+    name: 'Camiseta Carolina Herrera Blanca Talla XL',
+    description: 'Camiseta blanca clásica con monograma CH en contraste. Elegancia urbana con confección ligera y transpirable.',
+    details: [
+      'Algodón peinado premium',
+      'Monograma CH bordado/estampado de lujo',
+      'Corte regular contemporáneo',
+      'Tacto fresco ideal para el día'
+    ],
+    densityGsm: 190,
+    price: 120000,
+    compareAtPrice: 210000,
+    badge: 'EDICIÓN LUXE',
+    categorySlug: 'camisetas' as any,
+    images: [
+      {
+        id: 'img-cam-4',
+        url: 'https://cdn.catalog-store.link/f51df3ddfc40ebbf27b6b3e52bf144fd_photo.webp',
+        altText: 'Camiseta Carolina Herrera Blanca Talla XL — Prestige MBM',
+        isPrimary: true,
+        order: 0,
+      }
+    ],
+    variants: [
+      { id: 'var-cam-4-xl', productId: 'prod-cam-4', size: 'XL', color: 'Blanco', sku: 'PBM-CH-BLA-XL', stock: 4 }
+    ],
+    isAvailable: true,
+    isFeatured: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'prod-cam-5',
+    slug: 'camiseta-coach-blanca-xl',
+    name: 'Camiseta Coach Blanca Talla XL',
+    description: 'Diseño minimalista con emblema Coach en tonos oscuros sobre base blanca marfil.',
+    details: [
+      'Algodón denso 200 GSM',
+      'Cuello cerrado resistente',
+      'Corte suelto y cómodo',
+      'Despacho inmediato en Bogotá'
+    ],
+    densityGsm: 200,
+    price: 140000,
+    compareAtPrice: 230000,
     badge: '200 GSM',
-    categorySlug: 'tees',
+    categorySlug: 'camisetas' as any,
     images: [
       {
-        id: 'img-2',
-        url: '/assets/products/tee-washed-black.svg',
-        altText: 'Boxy Tee Washed Black — PRESTIGE MBM',
+        id: 'img-cam-5',
+        url: 'https://cdn.catalog-store.link/177d566f149651475efa375c53c02f3b_photo.webp',
+        altText: 'Camiseta Coach Blanca Talla XL — Prestige MBM',
         isPrimary: true,
         order: 0,
       }
     ],
     variants: [
-      { id: 'v-2-s', productId: 'prod-2', size: 'S', color: 'Washed Black', sku: 'PBM-TEE-S', stock: 10 },
-      { id: 'v-2-m', productId: 'prod-2', size: 'M', color: 'Washed Black', sku: 'PBM-TEE-M', stock: 15 },
-      { id: 'v-2-l', productId: 'prod-2', size: 'L', color: 'Washed Black', sku: 'PBM-TEE-L', stock: 12 },
-      { id: 'v-2-xl', productId: 'prod-2', size: 'XL', color: 'Washed Black', sku: 'PBM-TEE-XL', stock: 6 },
+      { id: 'var-cam-5-xl', productId: 'prod-cam-5', size: 'XL', color: 'Blanco', sku: 'PBM-COACH-XL', stock: 4 }
     ],
     isAvailable: true,
-    isFeatured: true,
+    isFeatured: false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
-    id: 'prod-3',
-    slug: 'pantalon-cargo-wide-leg',
-    name: 'Pantalón Cargo Wide-Leg',
-    description: 'Dril pesado nacional con bolsillos tácticos de fuelle y corte ancho contemporáneo para movimiento fluido.',
+    id: 'prod-cam-6',
+    slug: 'camiseta-boss-roja-xl',
+    name: 'Camiseta Boss Roja Talla XL',
+    description: 'Tono rojo rubí enérgico con tipografía Boss frontal. Confección de alta presencia para destacar en la ciudad.',
     details: [
-      'Dril pesado 100% algodón colombiano',
-      'Seis bolsillos utilitarios con cierre velcro',
-      'Bota recta de 24 cm para caída sobre calzado',
-      'Ajuste con pasadores reforzados'
+      'Algodón reactivo que no decolora',
+      'Gramaje pesado 200 GSM',
+      'Silueta street contemporánea',
+      'Caída recta impecable'
     ],
-    densityGsm: 240,
-    price: 155000,
+    densityGsm: 200,
+    price: 140000,
     compareAtPrice: 220000,
-    badge: 'DRIL PESADO',
-    categorySlug: 'pantalones',
+    badge: '200 GSM',
+    categorySlug: 'camisetas' as any,
     images: [
       {
-        id: 'img-3',
-        url: '/assets/products/cargo-wide-leg.svg',
-        altText: 'Pantalón Cargo Wide-Leg — PRESTIGE MBM',
+        id: 'img-cam-6',
+        url: 'https://cdn.catalog-store.link/6ed0774ca2dfa1756cc95a2eba213c4a_photo.webp',
+        altText: 'Camiseta Boss Roja Talla XL — Prestige MBM',
         isPrimary: true,
         order: 0,
       }
     ],
     variants: [
-      { id: 'v-3-28', productId: 'prod-3', size: '28', color: 'Obsidian', sku: 'PBM-CARGO-28', stock: 6 },
-      { id: 'v-3-30', productId: 'prod-3', size: '30', color: 'Obsidian', sku: 'PBM-CARGO-30', stock: 10 },
-      { id: 'v-3-32', productId: 'prod-3', size: '32', color: 'Obsidian', sku: 'PBM-CARGO-32', stock: 10 },
-      { id: 'v-3-34', productId: 'prod-3', size: '34', color: 'Obsidian', sku: 'PBM-CARGO-34', stock: 4 },
+      { id: 'var-cam-6-xl', productId: 'prod-cam-6', size: 'XL', color: 'Rojo Rubí', sku: 'PBM-BOSS-ROJ-XL', stock: 5 }
     ],
     isAvailable: true,
-    isFeatured: true,
+    isFeatured: false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
+
+  // --- GORRAS ---
   {
-    id: 'prod-4',
-    slug: 'biker-jacket-matte-finish',
-    name: 'Biker Jacket Matte Finish',
-    description: 'Chaqueta de silueta rígida mate con cremallera metálica de doble apertura y forro térmico suave.',
+    id: 'prod-gor-1',
+    slug: 'gorra-belica-piedreria-cruces-doradas',
+    name: 'Gorra Bélica en Pedrería con Cruces en Acero Doradas',
+    description: 'Diseño exclusivo con incrustaciones de pedrería fina y cruces de acero dorado inoxidable. Estructura rígida de alto impacto visual.',
     details: [
-      'Estructura rígida con acabado mate antibrillo',
-      'Cremallera metálica calibre 8 antioxidante',
-      'Corte ceñido a la cintura estilo Bogotá nocturna',
-      'Bolsillo interior oculto de seguridad'
+      'Pedrería fijada con prensa térmica de alta resistencia',
+      'Cruces en acero quirúrgico doradas',
+      'Visera curva con textura prémium',
+      'Broche metálico ajustable'
     ],
     densityGsm: 300,
-    price: 210000,
-    compareAtPrice: 310000,
-    badge: 'EDICIÓN LUXE',
-    categorySlug: 'hoodies',
+    price: 95000,
+    compareAtPrice: 160000,
+    badge: 'EDICIÓN ESPECIAL',
+    categorySlug: 'gorras' as any,
     images: [
       {
-        id: 'img-4',
-        url: '/assets/products/biker-jacket.svg',
-        altText: 'Biker Jacket Matte Finish — PRESTIGE MBM',
+        id: 'img-gor-1',
+        url: 'https://cdn.catalog-store.link/ddc326263f4615743b00fcb113f3ed0a_photo.webp',
+        altText: 'Gorra Bélica en Pedrería con Cruces Doradas — Prestige MBM',
         isPrimary: true,
         order: 0,
       }
     ],
     variants: [
-      { id: 'v-4-s', productId: 'prod-4', size: 'S', color: 'Matte Black', sku: 'PBM-BIKER-S', stock: 4 },
-      { id: 'v-4-m', productId: 'prod-4', size: 'M', color: 'Matte Black', sku: 'PBM-BIKER-M', stock: 7 },
-      { id: 'v-4-l', productId: 'prod-4', size: 'L', color: 'Matte Black', sku: 'PBM-BIKER-L', stock: 5 },
-      { id: 'v-4-xl', productId: 'prod-4', size: 'XL', color: 'Matte Black', sku: 'PBM-BIKER-XL', stock: 3 },
+      { id: 'var-gor-1', productId: 'prod-gor-1', size: 'Ajustable', color: 'Negro / Dorado', sku: 'PBM-GOR-CRUCES', stock: 6 }
+    ],
+    isAvailable: true,
+    isFeatured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'prod-gor-2',
+    slug: 'gorra-belica-negra-777-gamuza',
+    name: 'Gorra Bélica Negra 777 en Gamuza',
+    description: 'Acabado en gamuza suave color negro azabache con parche bordado 777 de la suerte en alto relieve.',
+    details: [
+      'Gamuza suave prémium al tacto',
+      'Bordado 777 en 3D de alta densidad',
+      'Copa estructurada que no pierde la forma',
+      'Cierre ajustable de lujo'
+    ],
+    densityGsm: 280,
+    price: 90000,
+    compareAtPrice: 150000,
+    badge: 'GAMUZA LUXE',
+    categorySlug: 'gorras' as any,
+    images: [
+      {
+        id: 'img-gor-2',
+        url: 'https://cdn.catalog-store.link/4209a77fbbf424f93d269f6a0f4eeec2_photo.webp',
+        altText: 'Gorra Bélica Negra 777 en Gamuza — Prestige MBM',
+        isPrimary: true,
+        order: 0,
+      }
+    ],
+    variants: [
+      { id: 'var-gor-2', productId: 'prod-gor-2', size: 'Ajustable', color: 'Negro Gamuza', sku: 'PBM-GOR-777', stock: 8 }
+    ],
+    isAvailable: true,
+    isFeatured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'prod-gor-3',
+    slug: 'gorra-belica-treboles-negra-gamuza',
+    name: 'Gorra Bélica Tréboles Negra en Gamuza',
+    description: 'Confeccionada en gamuza profunda con parches de tréboles bélicos bordados en relieve verde y blanco.',
+    details: [
+      'Gamuza mate anti-polvo',
+      'Bordados de trébol en relieve reforzado',
+      'Forro interno antitranspirante',
+      'Ajuste trasero ergonómico'
+    ],
+    densityGsm: 280,
+    price: 90000,
+    compareAtPrice: 150000,
+    badge: 'GAMUZA LUXE',
+    categorySlug: 'gorras' as any,
+    images: [
+      {
+        id: 'img-gor-3',
+        url: 'https://cdn.catalog-store.link/035bdd4f9c5efd8626fe775d0684c109_photo.webp',
+        altText: 'Gorra Bélica Tréboles Negra en Gamuza — Prestige MBM',
+        isPrimary: true,
+        order: 0,
+      }
+    ],
+    variants: [
+      { id: 'var-gor-3', productId: 'prod-gor-3', size: 'Ajustable', color: 'Negro Gamuza', sku: 'PBM-GOR-TREB', stock: 6 }
+    ],
+    isAvailable: true,
+    isFeatured: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'prod-gor-4',
+    slug: 'gorra-goorin-bros-caballo-negra',
+    name: 'Gorra Goorin Bros Caballo Negra',
+    description: 'La icónica silueta de camionero con el parche insigne de Caballo enmarcado en dorado sobre base negra.',
+    details: [
+      'Parche icónico del Caballo de Fuerza',
+      'Malla transpirable en parte trasera',
+      'Visera con costuras simétricas',
+      'El sello de identidad de PRESTIGE MBM'
+    ],
+    densityGsm: 260,
+    price: 70000,
+    compareAtPrice: 120000,
+    badge: 'CABALLO MBM',
+    categorySlug: 'gorras' as any,
+    images: [
+      {
+        id: 'img-gor-4',
+        url: 'https://cdn.catalog-store.link/991083adec48d4f98dea8447b5fc97b3_photo.webp',
+        altText: 'Gorra Goorin Bros Caballo Negra — Prestige MBM',
+        isPrimary: true,
+        order: 0,
+      }
+    ],
+    variants: [
+      { id: 'var-gor-4', productId: 'prod-gor-4', size: 'Ajustable', color: 'Negro', sku: 'PBM-GOORIN-CAB-NEG', stock: 10 }
+    ],
+    isAvailable: true,
+    isFeatured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'prod-gor-5',
+    slug: 'gorra-puma-ferrari-gris',
+    name: 'Gorra Puma en Colaboración con Ferrari Gris',
+    description: 'Edición Motorsport con el escudo Scuderia Ferrari metálico en el frontal sobre corona gris texturizada.',
+    details: [
+      'Escudo Ferrari de alta fidelidad',
+      'Material liviano y de rápido secado',
+      'Cierre con hebilla Puma metálica',
+      'Diseño aerodinámico deportivo'
+    ],
+    densityGsm: 220,
+    price: 70000,
+    compareAtPrice: 130000,
+    badge: 'MOTORSPORT',
+    categorySlug: 'gorras' as any,
+    images: [
+      {
+        id: 'img-gor-5',
+        url: 'https://cdn.catalog-store.link/e88740284b970d0d41ef5d8c5e11d973_photo.webp',
+        altText: 'Gorra Puma Ferrari Gris — Prestige MBM',
+        isPrimary: true,
+        order: 0,
+      }
+    ],
+    variants: [
+      { id: 'var-gor-5', productId: 'prod-gor-5', size: 'Ajustable', color: 'Gris Ferrari', sku: 'PBM-PUMA-FER', stock: 5 }
+    ],
+    isAvailable: true,
+    isFeatured: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+
+  // --- RELOJERÍA ---
+  {
+    id: 'prod-rel-1',
+    slug: 'reloj-rolex-rojo-con-negro',
+    name: 'Reloj Rolex Rojo con Negro',
+    description: 'Bisel giratorio bitono rojo y negro estilo Pepsi/Coke con dial negro de alto contraste y pulso de eslabones en acero inoxidable.',
+    details: [
+      'Bisel giratorio cerámico bitono rojo y negro',
+      'Caja y pulso en acero inoxidable macizo',
+      'Lupa cíclope sobre ventana de fecha a las 3',
+      'Broche desplegable de seguridad de doble traba'
+    ],
+    densityGsm: 350,
+    price: 80000,
+    compareAtPrice: 160000,
+    badge: 'ALTA PRESENCIA',
+    categorySlug: 'relojeria' as any,
+    images: [
+      {
+        id: 'img-rel-1',
+        url: 'https://cdn.catalog-store.link/a0b07a5b0dbdcc5f458c285c49840202_photo.webp',
+        altText: 'Reloj Rolex Rojo con Negro — Prestige MBM',
+        isPrimary: true,
+        order: 0,
+      }
+    ],
+    variants: [
+      { id: 'var-rel-1', productId: 'prod-rel-1', size: 'Ajustable Acero', color: 'Rojo / Negro', sku: 'PBM-REL-ROLEX-RN', stock: 4 }
+    ],
+    isAvailable: true,
+    isFeatured: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'prod-rel-2',
+    slug: 'reloj-tommy-hilfiger-deportivo',
+    name: 'Reloj Tommy Hilfiger Deportivo',
+    description: 'Reloj deportivo con pulso de silicona ergonómico y dial multifunción con los distintivos colores azul, blanco y rojo.',
+    details: [
+      'Pulso de silicona de alta durabilidad y comodidad',
+      'Subdiales funcionales con acentos icónicos',
+      'Bisel deportivo en negro mate',
+      'Resistente al uso diario urbano'
+    ],
+    densityGsm: 250,
+    price: 60000,
+    compareAtPrice: 120000,
+    badge: 'DEPORTIVO URBANO',
+    categorySlug: 'relojeria' as any,
+    images: [
+      {
+        id: 'img-rel-2',
+        url: 'https://cdn.catalog-store.link/3f51e0fdfd7ddb0cca51138fe2c50c90_photo.webp',
+        altText: 'Reloj Tommy Hilfiger Deportivo — Prestige MBM',
+        isPrimary: true,
+        order: 0,
+      }
+    ],
+    variants: [
+      { id: 'var-rel-2', productId: 'prod-rel-2', size: 'Silicona Ajustable', color: 'Azul / Blanco / Rojo', sku: 'PBM-REL-TOMMY', stock: 6 }
     ],
     isAvailable: true,
     isFeatured: true,
@@ -152,52 +442,54 @@ export const DEFAULT_ATELIER_LOOKS: AtelierLook[] = [
     id: 'look-1',
     key: 'night',
     title: '01 • Noche Zona Rosa',
-    subtitle: 'Biker Jacket Matte + Pantalón Sastre Wide',
-    description: 'Dos piezas estructuradas para el frío de Bogotá y la vida nocturna de alta presencia.',
-    price: 320000,
-    compareAtPrice: 430000,
+    subtitle: 'Reloj Rolex Rojo/Negro + Camiseta Boss Negra + Gorra Gamuza 777',
+    description: 'Conjunto de alta presencia para la noche bogotana: reloj de acero bitono, camiseta de 200 GSM negro profundo y gorra en gamuza.',
+    price: 280000,
+    compareAtPrice: 420000,
     isPopular: true,
-    imageUrl: '/assets/products/biker-jacket.svg',
+    imageUrl: 'https://cdn.catalog-store.link/c179cae6bb3bcb33d8619d1bc893df0f_photo.webp',
     includedItems: [
-      { name: 'Biker Jacket Matte Finish', description: 'Estructura rígida mate con herrajes oscurecidos', productSlug: 'biker-jacket-matte-finish' },
-      { name: 'Pantalón Sastre Wide', description: 'Caída pesada y pliegues pronunciados' }
+      { name: 'Camiseta Boss Negra Talla XL', description: '200 GSM algodón denso', productSlug: 'camiseta-boss-negra-xl' },
+      { name: 'Gorra Bélica Negra 777 en Gamuza', description: 'Gamuza azabache con bordado 3D', productSlug: 'gorra-belica-negra-777-gamuza' },
+      { name: 'Reloj Rolex Rojo con Negro', description: 'Acero macizo con bisel cerámico', productSlug: 'reloj-rolex-rojo-con-negro' }
     ]
   },
   {
     id: 'look-2',
     key: 'cold',
-    title: '02 • Clima Frío Diario 200 GSM',
-    subtitle: 'Heavy Hoodie Ash + Cargo Táctico',
-    description: 'El uniforme capitalino por excelencia: protección térmica densa y funcionalidad urbana.',
-    price: 270000,
-    compareAtPrice: 360000,
+    title: '02 • Streetwear Capitalino Diario',
+    subtitle: 'Camiseta Boss Azul + Gorra Goorin Caballo + Reloj Tommy',
+    description: 'El look urbano versátil para el día a día en Bogotá con identidad de caballo y comodidad extrema.',
+    price: 240000,
+    compareAtPrice: 380000,
     isPopular: false,
-    imageUrl: '/assets/products/hoodie-ash.svg',
+    imageUrl: 'https://cdn.catalog-store.link/76e9fc2b99b56a49956443e3169d2d72_photo.webp',
     includedItems: [
-      { name: 'Heavy Boxy Hoodie Ash', description: 'Felpa pesada 200 GSM corte boxy fit', productSlug: 'heavy-boxy-hoodie-ash' },
-      { name: 'Pantalón Cargo Wide-Leg', description: 'Dril pesado con bolsillos de fuelle', productSlug: 'pantalon-cargo-wide-leg' }
+      { name: 'Camiseta Boss Azul Talla XXL', description: 'Algodón pesado 200 GSM', productSlug: 'camiseta-boss-azul-xxl' },
+      { name: 'Gorra Goorin Bros Caballo Negra', description: 'Parche icónico de caballo', productSlug: 'gorra-goorin-bros-caballo-negra' },
+      { name: 'Reloj Tommy Hilfiger Deportivo', description: 'Pulso de silicona ergonómico', productSlug: 'reloj-tommy-hilfiger-deportivo' }
     ]
   },
   {
     id: 'look-3',
     key: 'minimal',
-    title: '03 • Minimal Boxy Puro',
-    subtitle: 'Boxy Tee Washed + Cargo Wide',
-    description: 'Silueta pura, líneas limpias y la textura inconfundible del algodón pesado peinado.',
-    price: 220000,
-    compareAtPrice: 300000,
+    title: '03 • Minimal White Luxe',
+    subtitle: 'Camiseta Hugo Blanca + Gorra Cruces Doradas',
+    description: 'Elegancia pura en blanco marfil con contraste en acero dorado para una presencia limpia e imponente.',
+    price: 210000,
+    compareAtPrice: 320000,
     isPopular: false,
-    imageUrl: '/assets/products/tee-washed-black.svg',
+    imageUrl: 'https://cdn.catalog-store.link/0b0c3c81adac2059597ed8a6fbe38696_photo.webp',
     includedItems: [
-      { name: 'Boxy Tee Washed Black', description: 'Algodón peinado 200 GSM cuello cerrado', productSlug: 'boxy-tee-washed-black' },
-      { name: 'Pantalón Cargo Wide-Leg', description: 'Dril pesado corte recto contemporáneo', productSlug: 'pantalon-cargo-wide-leg' }
+      { name: 'Camiseta Hugo Blanca Talla XXL', description: 'Algodón denso 200 GSM', productSlug: 'camiseta-hugo-blanca-xxl' },
+      { name: 'Gorra Bélica Pedrería Cruces Doradas', description: 'Cruces en acero inoxidable', productSlug: 'gorra-belica-piedreria-cruces-doradas' }
     ]
-  },
+  }
 ];
 
 export function calculateSavings(units: number): SavingsComparison {
-  const workshopPerUnit = 140000;
-  const mallPerUnit = 260000;
+  const workshopPerUnit = 90000;
+  const mallPerUnit = 180000;
   const savingsPerUnit = mallPerUnit - workshopPerUnit;
 
   return {

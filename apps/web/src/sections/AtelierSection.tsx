@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DEFAULT_ATELIER_LOOKS, DEFAULT_PRODUCTS } from '../data/productDefaults';
+import { DEFAULT_ATELIER_LOOKS } from '../data/productDefaults';
 import { AtelierLook } from '@prestige/types';
 import { useCart } from '../components/cart/CartContext';
 import { Button } from '../components/common/Button';
@@ -11,7 +11,6 @@ export const AtelierSection: React.FC = () => {
   const { addItem } = useCart();
 
   const handleAddCombo = () => {
-    // Look for matching products or create combo item
     const comboProduct = {
       id: `combo-${selectedLook.key}`,
       slug: `combo-${selectedLook.key}`,
@@ -22,11 +21,11 @@ export const AtelierSection: React.FC = () => {
       price: selectedLook.price,
       compareAtPrice: selectedLook.compareAtPrice,
       badge: 'LOOK COORDINADO',
-      categorySlug: 'hoodies' as const,
+      categorySlug: 'camisetas' as const,
       images: [
         {
           id: `img-combo-${selectedLook.key}`,
-          url: selectedLook.imageUrl || '/assets/products/biker-jacket.svg',
+          url: selectedLook.imageUrl || 'https://cdn.catalog-store.link/c179cae6bb3bcb33d8619d1bc893df0f_photo.webp',
           altText: selectedLook.title,
           isPrimary: true,
           order: 0,
@@ -43,8 +42,8 @@ export const AtelierSection: React.FC = () => {
   };
 
   return (
-    <section className="px-5 md:px-10 max-w-7xl mx-auto my-16 md:my-24" id="atelier">
-      <div className="squircle-card p-8 md:p-14 bg-white border border-[rgba(18,18,18,0.08)]">
+    <section className="px-5 md:px-10 max-w-7xl mx-auto my-16 md:my-28" id="atelier">
+      <div className="squircle-card p-8 md:p-14 bg-white border border-[rgba(18,18,18,0.08)] shadow-xl">
         {/* Section Header */}
         <div className="max-w-2xl mb-10">
           <span className="font-brand font-bold text-[11px] tracking-widest text-[#777] uppercase block">
@@ -54,7 +53,7 @@ export const AtelierSection: React.FC = () => {
             Atelier Privé MBM
           </h2>
           <p className="text-[#555] text-sm md:text-base mt-2 leading-relaxed">
-            Configuramos conjuntos coordinados de alto gramaje para ocasiones específicas en Bogotá,
+            Configuramos conjuntos coordinados de camisetas de lujo, gorras estructuradas y relojería para ocasiones específicas en Bogotá,
             con descuento preferencial directo a tu bolsa.
           </p>
         </div>
@@ -70,7 +69,7 @@ export const AtelierSection: React.FC = () => {
                   onClick={() => setSelectedLook(look)}
                   className={`p-5 rounded-2xl border text-left flex justify-between items-center transition-all duration-300 ${
                     isActive
-                      ? 'bg-[#121212] text-[#e8e8e6] border-[#121212] shadow-lg scale-[1.01]'
+                      ? 'bg-[#121212] text-[#e8e8e6] border-[#121212] shadow-xl scale-[1.01]'
                       : 'bg-[#f7f7f5] text-[#121212] border-[rgba(18,18,18,0.08)] hover:bg-[#eee]'
                   }`}
                   aria-pressed={isActive}
@@ -92,19 +91,30 @@ export const AtelierSection: React.FC = () => {
           </div>
 
           {/* Active Look Showcase Card (Right) */}
-          <div className="lg:col-span-6 p-7 md:p-8 rounded-2xl bg-[#f5f5f3] border border-[rgba(18,18,18,0.06)] flex flex-col justify-between">
+          <div className="lg:col-span-6 p-7 md:p-8 rounded-3xl bg-[#f5f5f3] border border-[rgba(18,18,18,0.06)] flex flex-col justify-between shadow-md">
             <div>
               <div className="flex justify-between items-center mb-4">
                 <span className="font-brand font-bold text-[10px] tracking-widest text-[#777] uppercase">
                   Detalles del Conjunto
                 </span>
-                <span className="bg-[#1b7a42] text-white font-brand font-bold text-[9px] px-3 py-1 rounded-full uppercase flex items-center gap-1">
+                <span className="bg-[#1b7a42] text-white font-brand font-bold text-[9px] px-3 py-1 rounded-full uppercase flex items-center gap-1 shadow-sm">
                   <Sparkles className="w-3 h-3" />
                   <span>Ahorro en Conjunto</span>
                 </span>
               </div>
 
-              <h3 className="font-brand font-black text-2xl md:text-3xl text-[#121212]">
+              {/* Photo preview of active combo */}
+              {selectedLook.imageUrl && (
+                <div className="w-full h-48 rounded-2xl overflow-hidden mb-4 bg-white border border-[rgba(18,18,18,0.06)] flex items-center justify-center">
+                  <img
+                    src={selectedLook.imageUrl}
+                    alt={selectedLook.title}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+              )}
+
+              <h3 className="font-brand font-black text-2xl text-[#121212]">
                 {selectedLook.title}
               </h3>
               <p className="text-xs md:text-sm text-[#666] mt-2 leading-relaxed">

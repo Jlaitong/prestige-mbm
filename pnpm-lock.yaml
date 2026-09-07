@@ -8,6 +8,15 @@ importers:
 
   .:
     devDependencies:
+      '@nestjs/common':
+        specifier: ^10.4.22
+        version: 10.4.22
+      '@nestjs/core':
+        specifier: ^10.4.22
+        version: 10.4.22
+      '@nestjs/platform-express':
+        specifier: ^10.4.22
+        version: 10.4.22
       '@prisma/client':
         specifier: 5.22.0
         version: 5.22.0
