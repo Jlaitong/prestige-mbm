@@ -1,4 +1,4 @@
-export type CategorySlug = 'all' | 'hoodies' | 'tees' | 'pantalones';
+export type CategorySlug = 'all' | 'camisetas' | 'gorras' | 'relojeria' | 'hoodies' | 'pantalones';
 export interface Category {
     id: string;
     name: string;
