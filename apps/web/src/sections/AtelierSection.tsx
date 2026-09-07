@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../components/cart/CartContext';
 import { Button } from '../components/common/Button';
-import { Price } from '../components/common/Price';
-import { Sparkles, ShoppingBag, Shuffle, Check, MessageCircle, ArrowRight } from 'lucide-react';
+import { Sparkles, ShoppingBag, Shuffle, Check, MessageCircle } from 'lucide-react';
 import { SplitText } from '../components/react-bits/SplitText';
 
 interface CuratedOutfit {

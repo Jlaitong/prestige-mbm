@@ -2,6 +2,7 @@
   "name": "prestige-mbm-monorepo",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@9.15.4",
   "description": "PRESTIGE MBM — Luxury Streetwear Bogotá Monorepo",
   "scripts": {
     "dev:web": "pnpm --filter @prestige/web dev",
@@ -10,7 +11,8 @@
     "build:types": "pnpm --filter @prestige/types build",
     "build:web": "pnpm --filter @prestige/web build",
     "build:api": "pnpm --filter @prestige/api build",
-    "build": "pnpm build:types && pnpm build:api && pnpm build:web",
+    "build": "pnpm build:types && pnpm build:web",
+    "build:all": "pnpm build:types && pnpm build:api && pnpm build:web",
     "lint": "pnpm -r run lint",
     "test": "pnpm -r run test",
     "prisma:generate": "pnpm --filter @prestige/api prisma:generate",
