@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowUpRight, MessageCircle } from 'lucide-react';
+import { ArrowUpRight, MessageCircle, ArrowUp } from 'lucide-react';
+import { smoothScrollTo, scrollToTop } from '../animations/smoothScroll';
 
 export const Footer: React.FC = () => {
   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '573332874590';
@@ -27,19 +28,22 @@ export const Footer: React.FC = () => {
       </aside>
 
       {/* Main Brand Footer */}
-      <footer className="bg-[#121212] text-[#e8e8e6] pt-20 pb-12 px-5 md:px-10 mt-28">
+      <footer className="bg-[#0e0e0d] text-[#e8e8e6] pt-20 pb-12 px-5 md:px-10 mt-28 border-t border-white/10 relative">
         <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
-          {/* Brand Monogram */}
-          <img
-            src="/assets/branding/horse-logo.svg"
-            alt="Isotipo PRESTIGE"
-            className="w-12 h-12 invert mb-3"
-          />
+          {/* Brand Monogram & Official Horse Mark */}
+          <div className="w-24 h-24 mb-3 flex items-center justify-center filter drop-shadow-lg">
+            <img
+              src="/assets/branding/prestige-official-logo.svg"
+              alt="Isotipo Oficial PRESTIGE MBM"
+              className="w-full h-full object-contain"
+            />
+          </div>
+
           <span className="font-brand font-black text-3xl tracking-tighter text-white">
             PRESTIGE
           </span>
-          <span className="font-brand font-bold text-xs tracking-[0.3em] text-[#888] mt-0.5">
-            MBM
+          <span className="font-brand font-bold text-xs tracking-[0.3em] text-[#b7b79e] mt-0.5">
+            MBM • BOGOTÁ
           </span>
 
           {/* Exclusivity Statement */}
@@ -78,15 +82,39 @@ export const Footer: React.FC = () => {
             </a>
           </div>
 
-          {/* Secondary Quick Links */}
-          <div className="flex flex-wrap justify-center gap-6 text-xs text-[#888] mb-10 font-medium">
-            <a href="/#catalogo" className="hover:text-white transition-colors">Drops Disponibles</a>
-            <a href="/#comparador" className="hover:text-white transition-colors">Simulador de Ahorro</a>
-            <a href="/#atelier" className="hover:text-white transition-colors">Atelier Privé MBM</a>
+          {/* Secondary Quick Links with Smooth Gliding Navigation */}
+          <div className="flex flex-wrap justify-center items-center gap-6 text-xs text-[#888] mb-10 font-medium">
+            <button
+              onClick={() => smoothScrollTo('#catalogo')}
+              className="hover:text-white transition-colors"
+            >
+              Drops Disponibles
+            </button>
+            <button
+              onClick={() => smoothScrollTo('#comparador')}
+              className="hover:text-white transition-colors"
+            >
+              Simulador de Ahorro
+            </button>
+            <button
+              onClick={() => smoothScrollTo('#atelier')}
+              className="hover:text-white transition-colors"
+            >
+              Atelier Privé MBM
+            </button>
             <span className="text-[#555]">•</span>
             <span>Envíos 24H en Bogotá</span>
             <span>Pagos Nequi / PSE / Transferencia</span>
           </div>
+
+          {/* Back to Top Floating Trigger */}
+          <button
+            onClick={() => scrollToTop(false)}
+            className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white hover:text-black text-white text-xs font-brand font-bold uppercase tracking-wider transition-all"
+          >
+            <ArrowUp className="w-3.5 h-3.5" />
+            <span>Volver Arriba</span>
+          </button>
 
           {/* Legal Bar */}
           <div className="w-full pt-8 border-t border-white/10 text-xs text-[#777] flex flex-col sm:flex-row justify-between items-center gap-3">

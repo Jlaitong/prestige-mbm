@@ -3,6 +3,8 @@ import { Button } from '../components/common/Button';
 import { HorseScene } from '../components/horse/HorseScene';
 import { initHeroAnimation } from '../animations/gsapAnimations';
 import { Sparkles, ArrowDownRight, ShieldCheck, Zap } from 'lucide-react';
+import { smoothScrollTo } from '../animations/smoothScroll';
+import { SplitText } from '../components/react-bits/SplitText';
 
 export const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -32,38 +34,49 @@ export const Hero: React.FC = () => {
 
         <div className="hidden sm:inline-flex items-center gap-1 text-[11px] font-brand font-bold uppercase text-[#777]">
           <Zap className="w-3.5 h-3.5 text-[#121212]" />
-          <span>Colección 2026</span>
+          <span>Colección Oficial 2026</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
         {/* Left Column: Editorial Headline & Copy */}
         <div className="lg:col-span-7">
-          <h1 className="hero-reveal font-brand font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.92] tracking-tighter text-[#121212] mb-6 uppercase">
-            ALTA PRESENCIA.<br />
-            <span className="text-[#6e6e6b] drop-shadow-sm">ACTITUD CAPITALINA.</span><br />
-            EXCLUSIVIDAD PURA.
-          </h1>
+          <div className="hero-reveal mb-6">
+            <SplitText
+              text="ALTA PRESENCIA. ACTITUD CAPITALINA. EXCLUSIVIDAD PURA."
+              as="h1"
+              by="words"
+              stagger={0.06}
+              className="font-brand font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.92] tracking-tighter text-[#121212] uppercase"
+            />
+          </div>
 
           <p className="hero-sub-reveal text-[#444] text-base md:text-lg max-w-xl mb-8 font-normal leading-relaxed">
             Prendas de corte boxy, gorras estructuradas y relojería de presencia diseñadas para Bogotá.
             Eliminamos el 45% de sobrecostos de centros comerciales para darte confección prémium directo de taller.
           </p>
 
-          {/* Action CTAs with Micro-Physics */}
+          {/* Action CTAs with Smooth Gliding Scroll */}
           <div className="hero-sub-reveal flex flex-wrap items-center gap-4 mb-10">
-            <a href="#catalogo">
-              <Button variant="primary" size="lg" className="gap-2 shadow-xl hover:scale-105 transition-transform">
-                <span>Explorar Colección</span>
-                <ArrowDownRight className="w-4 h-4" />
-              </Button>
-            </a>
-            <a href="#comparador">
-              <Button variant="secondary" size="lg" className="gap-2 hover:bg-white transition-all">
-                <Sparkles className="w-4 h-4 text-[#121212]" />
-                <span>Simulador de Ahorro (-$90K)</span>
-              </Button>
-            </a>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => smoothScrollTo('#catalogo')}
+              className="gap-2 shadow-xl hover:scale-105 transition-transform"
+            >
+              <span>Explorar Colección</span>
+              <ArrowDownRight className="w-4 h-4" />
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="lg"
+              onClick={() => smoothScrollTo('#comparador')}
+              className="gap-2 hover:bg-white transition-all"
+            >
+              <Sparkles className="w-4 h-4 text-[#121212]" />
+              <span>Simulador de Ahorro (-$90K)</span>
+            </Button>
           </div>
 
           {/* Specifications Grid */}

@@ -6,6 +6,7 @@ import { Badge } from '../components/common/Badge';
 import { Price } from '../components/common/Price';
 import { Button } from '../components/common/Button';
 import { ArrowLeft, ShoppingBag, MessageCircle, ShieldCheck, Truck, Sparkles } from 'lucide-react';
+import { GlareHover } from '../components/react-bits/GlareHover';
 
 export const ProductDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -60,17 +61,19 @@ export const ProductDetailPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
         {/* Left: Gallery Box */}
         <div className="lg:col-span-7 flex flex-col gap-4">
-          <div className="w-full h-[380px] sm:h-[480px] md:h-[540px] bg-[#dededb] rounded-3xl p-8 flex items-center justify-center relative overflow-hidden squircle-card">
-            <div className="absolute top-5 left-5 z-10 flex gap-2">
-              <Badge variant="dark">{product.badge || `${product.densityGsm} GSM`}</Badge>
-              <Badge variant="green">DISPONIBLE EN BOGOTÁ</Badge>
+          <GlareHover maxTilt={6} glareOpacity={0.2} borderRadius="1.5rem">
+            <div className="w-full h-[380px] sm:h-[480px] md:h-[540px] bg-[#dededb] rounded-3xl p-8 flex items-center justify-center relative overflow-hidden squircle-card">
+              <div className="absolute top-5 left-5 z-10 flex gap-2">
+                <Badge variant="dark">{product.badge || `${product.densityGsm} GSM`}</Badge>
+                <Badge variant="green">DISPONIBLE EN BOGOTÁ</Badge>
+              </div>
+              <img
+                src={product.images[selectedImageIndex]?.url || product.images[0]?.url}
+                alt={product.name}
+                className="w-full h-full max-h-[85%] object-contain"
+              />
             </div>
-            <img
-              src={product.images[selectedImageIndex]?.url || product.images[0]?.url}
-              alt={product.name}
-              className="w-full h-full max-h-[85%] object-contain"
-            />
-          </div>
+          </GlareHover>
 
           {/* Thumbnails if multiple images exist */}
           {product.images.length > 1 && (

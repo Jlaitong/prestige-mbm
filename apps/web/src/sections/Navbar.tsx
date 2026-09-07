@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../components/cart/CartContext';
 import { ShoppingBag, Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { smoothScrollTo } from '../animations/smoothScroll';
 
 export const Navbar: React.FC = () => {
   const { totalCount, openCart } = useCart();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,22 +24,34 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  const handleNavClick = (targetId: string) => {
+    setMobileMenuOpen(false);
+    if (location.pathname === '/') {
+      smoothScrollTo(targetId);
+    } else {
+      navigate(`/${targetId}`);
+      setTimeout(() => smoothScrollTo(targetId), 150);
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#e8e8e6]/90 backdrop-blur-xl border-b border-[rgba(18,18,18,0.08)] py-3'
+          ? 'bg-[#e8e8e6]/92 backdrop-blur-xl border-b border-[rgba(18,18,18,0.08)] py-3 shadow-sm'
           : 'bg-transparent py-4 md:py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 md:px-10 flex items-center justify-between">
-        {/* Brand Logo */}
+        {/* Brand Logo with Official Horse Mark */}
         <Link to="/" className="flex items-center gap-3.5 group" aria-label="PRESTIGE MBM Inicio">
-          <img
-            src="/assets/branding/horse-logo.svg"
-            alt="Logo Caballo PRESTIGE"
-            className="w-9 h-9 transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3"
-          />
+          <div className="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            <img
+              src="/assets/branding/prestige-official-logo.svg"
+              alt="Logo PRESTIGE MBM"
+              className="w-full h-full object-contain"
+            />
+          </div>
           <div className="flex flex-col">
             <span className="font-brand font-black text-2xl tracking-tighter leading-none text-[#121212]">
               PRESTIGE
@@ -52,26 +66,26 @@ export const Navbar: React.FC = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Navigation Links with Smooth Gliding Scroll */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Navegación principal">
-          <a
-            href="/#catalogo"
+          <button
+            onClick={() => handleNavClick('#catalogo')}
             className="font-brand font-bold text-xs uppercase tracking-wider text-[#121212] hover:opacity-70 transition-opacity"
           >
             Drops Disponibles
-          </a>
-          <a
-            href="/#comparador"
+          </button>
+          <button
+            onClick={() => handleNavClick('#comparador')}
             className="font-brand font-bold text-xs uppercase tracking-wider text-[#121212] hover:opacity-70 transition-opacity"
           >
             Taller vs. Mall
-          </a>
-          <a
-            href="/#atelier"
+          </button>
+          <button
+            onClick={() => handleNavClick('#atelier')}
             className="font-brand font-bold text-xs uppercase tracking-wider text-[#121212] hover:opacity-70 transition-opacity"
           >
             Atelier Privé
-          </a>
+          </button>
         </nav>
 
         {/* Right Action: Bolsa & Mobile Hamburger */}
@@ -104,27 +118,24 @@ export const Navbar: React.FC = () => {
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#f7f7f5] border-b border-[rgba(18,18,18,0.08)] px-5 py-6 space-y-4 animate-in slide-in-from-top duration-200">
-          <a
-            href="/#catalogo"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block font-brand font-bold text-sm uppercase tracking-wider text-[#121212] py-2 border-b border-[rgba(18,18,18,0.04)]"
+          <button
+            onClick={() => handleNavClick('#catalogo')}
+            className="w-full text-left font-brand font-bold text-sm uppercase tracking-wider text-[#121212] py-2 border-b border-[rgba(18,18,18,0.04)]"
           >
             Drops Disponibles
-          </a>
-          <a
-            href="/#comparador"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block font-brand font-bold text-sm uppercase tracking-wider text-[#121212] py-2 border-b border-[rgba(18,18,18,0.04)]"
+          </button>
+          <button
+            onClick={() => handleNavClick('#comparador')}
+            className="w-full text-left font-brand font-bold text-sm uppercase tracking-wider text-[#121212] py-2 border-b border-[rgba(18,18,18,0.04)]"
           >
             Taller vs. Mall (-$120K)
-          </a>
-          <a
-            href="/#atelier"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block font-brand font-bold text-sm uppercase tracking-wider text-[#121212] py-2"
+          </button>
+          <button
+            onClick={() => handleNavClick('#atelier')}
+            className="w-full text-left font-brand font-bold text-sm uppercase tracking-wider text-[#121212] py-2"
           >
             Atelier Privé MBM
-          </a>
+          </button>
         </div>
       )}
     </header>

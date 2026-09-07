@@ -7,6 +7,8 @@ import { Price } from '../components/common/Price';
 import { Button } from '../components/common/Button';
 import { ShoppingBag, Eye, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { GlareHover } from '../components/react-bits/GlareHover';
+import { SplitText } from '../components/react-bits/SplitText';
 
 export const CatalogSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<CategorySlug>('all');
@@ -35,9 +37,11 @@ export const CatalogSection: React.FC = () => {
               Catálogo Oficial • Stock Inmediato Bogotá
             </span>
           </div>
-          <h2 className="font-brand font-black text-3xl sm:text-4xl md:text-5xl text-[#121212] uppercase tracking-tight">
-            Colección Disponible
-          </h2>
+          <SplitText
+            text="COLECCIÓN DISPONIBLE"
+            as="h2"
+            className="font-brand font-black text-3xl sm:text-4xl md:text-5xl text-[#121212] uppercase tracking-tight block"
+          />
         </div>
 
         {/* Animated Filter Chips */}
@@ -70,41 +74,43 @@ export const CatalogSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Products Grid with 3D Tilt & Staggered Reveal */}
+      {/* Products Grid with GlareHover 3D Tilt */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="group relative bg-white rounded-3xl p-5 border border-[rgba(18,18,18,0.08)] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between overflow-hidden"
+            className="group relative bg-white rounded-3xl p-5 border border-[rgba(18,18,18,0.08)] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden"
           >
-            {/* Top Image Showcase with Real Photo from Catalog CDN */}
+            {/* Top Image Showcase with GlareHover 3D Specular Effect */}
             <div>
-              <div className="relative w-full aspect-square bg-[#f5f5f3] rounded-2xl overflow-hidden mb-4 flex items-center justify-center">
-                {/* Badge top-left */}
-                <div className="absolute top-3 left-3 z-20">
-                  <Badge variant="dark">{product.badge || `${product.densityGsm} GSM`}</Badge>
+              <GlareHover maxTilt={7} glareOpacity={0.25} borderRadius="1rem" className="mb-4">
+                <div className="relative w-full aspect-square bg-[#f5f5f3] rounded-2xl overflow-hidden flex items-center justify-center">
+                  {/* Badge top-left */}
+                  <div className="absolute top-3 left-3 z-20">
+                    <Badge variant="dark">{product.badge || `${product.densityGsm} GSM`}</Badge>
+                  </div>
+
+                  {/* Real Product Image with Zoom on hover */}
+                  <img
+                    src={product.images[0]?.url}
+                    alt={product.name}
+                    className="w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                    loading="lazy"
+                  />
+
+                  {/* Quick Details Backdrop Hover Overlay */}
+                  <Link
+                    to={`/products/${product.slug}`}
+                    className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30 backdrop-blur-[2px]"
+                    aria-label={`Ver detalles de ${product.name}`}
+                  >
+                    <span className="bg-white text-black px-4 py-2.5 rounded-xl font-brand font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                      <Eye className="w-4 h-4" />
+                      <span>Ver Prenda</span>
+                    </span>
+                  </Link>
                 </div>
-
-                {/* Real Product Image with Zoom on hover */}
-                <img
-                  src={product.images[0]?.url}
-                  alt={product.name}
-                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
-                  loading="lazy"
-                />
-
-                {/* Quick Details Backdrop Hover Overlay */}
-                <Link
-                  to={`/products/${product.slug}`}
-                  className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30 backdrop-blur-[2px]"
-                  aria-label={`Ver detalles de ${product.name}`}
-                >
-                  <span className="bg-white text-black px-4 py-2.5 rounded-xl font-brand font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    <Eye className="w-4 h-4" />
-                    <span>Ver Prenda</span>
-                  </span>
-                </Link>
-              </div>
+              </GlareHover>
 
               {/* Product Info */}
               <div className="mb-4">

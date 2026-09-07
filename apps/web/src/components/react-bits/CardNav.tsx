@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Layers, DollarSign, Sparkles, ShieldCheck } from 'lucide-react';
+import { smoothScrollTo } from '../../animations/smoothScroll';
 
 export const CardNav: React.FC = () => {
   const navItems = [
@@ -22,9 +23,9 @@ export const CardNav: React.FC = () => {
       icon: Sparkles,
     },
     {
-      title: 'Garantía y Calidad',
+      title: 'Manifiesto de Taller',
       subtitle: 'Despacho 24H en Bogotá',
-      target: '#manifiesto',
+      target: '#story',
       icon: ShieldCheck,
     },
   ];
@@ -35,10 +36,10 @@ export const CardNav: React.FC = () => {
         {navItems.map((item, idx) => {
           const Icon = item.icon;
           return (
-            <a
+            <button
               key={idx}
-              href={item.target}
-              className="squircle-card p-5 bg-[#ffffff]/90 hover:bg-[#ffffff] border border-[rgba(18,18,18,0.06)] flex items-center justify-between group transition-all duration-300"
+              onClick={() => smoothScrollTo(item.target)}
+              className="squircle-card p-5 bg-[#ffffff]/90 hover:bg-[#ffffff] border border-[rgba(18,18,18,0.06)] flex items-center justify-between group transition-all duration-300 text-left cursor-pointer hover:shadow-lg hover:-translate-y-0.5"
             >
               <div className="flex items-center gap-3.5">
                 <div className="w-10 h-10 rounded-xl bg-[#121212] text-[#e8e8e6] flex items-center justify-center transition-transform group-hover:scale-105">
@@ -54,7 +55,7 @@ export const CardNav: React.FC = () => {
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-[#aaa] group-hover:text-[#121212] group-hover:translate-x-1 transition-all" />
-            </a>
+            </button>
           );
         })}
       </div>

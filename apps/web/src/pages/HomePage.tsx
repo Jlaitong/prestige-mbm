@@ -5,8 +5,9 @@ import { CardNav } from '../components/react-bits/CardNav';
 import { CatalogSection } from '../sections/CatalogSection';
 import { SavingsComparator } from '../sections/SavingsComparator';
 import { AtelierSection } from '../sections/AtelierSection';
-import { AccordionGallery } from '../components/react-bits/AccordionGallery';
+import { DepthCarousel } from '../components/react-bits/DepthCarousel';
 import { DEFAULT_PRODUCTS } from '../data/productDefaults';
+import { SplitText } from '../components/react-bits/SplitText';
 
 export const HomePage: React.FC = () => {
   return (
@@ -14,45 +15,34 @@ export const HomePage: React.FC = () => {
       {/* 1. Hero Editorial Cover */}
       <Hero />
 
-      {/* 2. ScrollExpand Transition into Workshop Story */}
-      <ScrollExpand
-        tagline="BODEGA CENTRAL EN BOGOTÁ • CONFECCIÓN 200 GSM"
-        headline="ALTA PRESENCIA • CERO SOBRECOSTOS DE MALL"
-      >
-        <p className="mb-3">
-          Cada pieza de PRESTIGE MBM está confeccionada en Bogotá con algodón de alto gramaje y felpa
-          pesada. Diseñamos con hombro caído y corte boxy estructurado para resistir el ritmo urbano
-          capitalino sin perder firmeza.
-        </p>
-        <p>
-          Al eliminar vitrinas de centros comerciales y costos de franquicias, trasladamos ese 45% de
-          ahorro directo al precio de taller para nuestros clientes.
-        </p>
-      </ScrollExpand>
+      {/* 2. Interactive Dark Luxury Manifesto (ScrollExpand 3-Pillar Deck) */}
+      <ScrollExpand />
 
       {/* 3. CardNav: Quick Jump Strip */}
       <CardNav />
 
-      {/* 4. Drops Catalog Grid */}
+      {/* 4. Drops Catalog Grid with GlareHover */}
       <CatalogSection />
 
       {/* 5. Savings Comparator Slider */}
       <SavingsComparator />
 
-      {/* 6. Accordion Gallery: Editorial Craftsmanship Showcase */}
+      {/* 6. Depth Carousel: 3D Layered Showcase */}
       <section className="px-5 md:px-10 max-w-7xl mx-auto my-16 md:my-24">
-        <div className="mb-8">
+        <div className="mb-6 text-center md:text-left">
           <span className="font-brand font-bold text-[11px] tracking-widest text-[#777] uppercase block">
-            Detalle Textil & Construcción
+            PERSPECTIVA 3D • CONSTRUCCIÓN 200 GSM
           </span>
-          <h2 className="font-brand font-black text-3xl sm:text-4xl text-[#121212] uppercase mt-1">
-            Galería de Estructura 200 GSM
-          </h2>
+          <SplitText
+            text="GALERÍA DE ESTRUCTURA TEXTIL"
+            as="h2"
+            className="font-brand font-black text-3xl sm:text-4xl md:text-5xl text-[#121212] uppercase mt-1 tracking-tight"
+          />
         </div>
-        <AccordionGallery products={DEFAULT_PRODUCTS} />
+        <DepthCarousel products={DEFAULT_PRODUCTS} autoPlay={false} />
       </section>
 
-      {/* 7. Atelier Privé MBM */}
+      {/* 7. Atelier Privé MBM - AI Outfit Stylist */}
       <AtelierSection />
     </main>
   );

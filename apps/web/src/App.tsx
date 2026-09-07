@@ -7,6 +7,7 @@ import { CartDrawer } from './components/cart/CartDrawer';
 import { HomePage } from './pages/HomePage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
 import { Preloader } from './components/common/Preloader';
+import { ScrollToTop } from './components/common/ScrollToTop';
 
 export const App: React.FC = () => {
   // Initialize Lenis smooth scroll
@@ -16,6 +17,9 @@ export const App: React.FC = () => {
 
   return (
     <>
+      {/* Route scroll reset so product pages always open at the top */}
+      <ScrollToTop />
+
       {loading && <Preloader onComplete={() => setLoading(false)} />}
       
       {/* Subtle luxury grain texture */}

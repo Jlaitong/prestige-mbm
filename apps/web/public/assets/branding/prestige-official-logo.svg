@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="100%" height="100%">
+  <defs>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Horse Head Profile Silhouette (Official PRESTIGE MBM Brand) -->
+  <g class="horse-silhouette" opacity="0.88">
+    <path fill="#9b9b9a" d="M 520,200 
+      C 525,185 530,165 528,155 
+      C 525,145 515,140 500,150 
+      C 485,130 460,120 440,125 
+      C 445,110 440,95 425,100 
+      C 410,105 395,120 385,135 
+      C 370,120 350,115 330,125 
+      C 310,135 300,155 295,175 
+      C 275,160 250,165 240,185 
+      C 230,205 240,225 255,240 
+      C 240,245 230,260 235,280 
+      C 240,295 255,305 270,310 
+      C 260,330 270,360 295,385 
+      C 325,415 365,450 410,500 
+      C 435,530 450,565 440,610 
+      C 455,580 470,545 465,510 
+      C 460,475 435,440 405,405 
+      C 425,415 450,410 465,395 
+      C 485,375 490,345 475,320 
+      C 495,315 515,295 515,270 
+      C 515,250 505,235 490,225 
+      C 510,220 525,210 520,200 Z" />
+    
+    <!-- Flowing Mane Locks -->
+    <path fill="#9b9b9a" d="M 435,110 C 470,125 500,150 515,185 C 490,175 465,175 440,185 C 460,165 455,140 435,110 Z" />
+    <path fill="#9b9b9a" d="M 380,130 C 410,150 435,180 445,215 C 425,205 405,205 385,215 C 405,190 400,160 380,130 Z" />
+    <path fill="#9b9b9a" d="M 320,135 C 355,160 375,195 380,235 C 360,225 340,225 320,238 C 340,205 340,170 320,135 Z" />
+    <path fill="#9b9b9a" d="M 285,180 C 315,210 330,250 330,290 C 310,278 290,280 275,295 C 290,260 295,220 285,180 Z" />
+    <path fill="#9b9b9a" d="M 255,245 C 285,275 300,320 295,365 C 280,350 260,350 245,365 C 265,330 265,285 255,245 Z" />
+    <!-- Fine Mane Tendrils at Bottom -->
+    <path fill="#9b9b9a" d="M 330,400 C 360,440 380,490 375,540 C 360,510 345,490 325,480 C 345,455 345,425 330,400 Z" />
+    <path fill="#9b9b9a" d="M 380,450 C 420,490 440,540 430,600 C 415,565 395,540 370,530 C 395,505 400,475 380,450 Z" />
+  </g>
+
+  <!-- Foreground Bold Brand Typography -->
+  <g id="brand-typography">
+    <!-- "PRESTIGE" Heavy Bold Italic Display -->
+    <text x="320" y="305" 
+      font-family="'Montserrat', 'Arial Black', sans-serif" 
+      font-size="68" 
+      font-weight="900" 
+      font-style="italic" 
+      letter-spacing="-1.5" 
+      fill="#121212" 
+      text-anchor="middle">
+      PRESTIGE
+    </text>
+
+    <!-- Left Horizontal Bar -->
+    <rect x="95" y="338" width="115" height="20" rx="3" fill="#121212" />
+
+    <!-- Stylized "MBM" Italic Brush/Script Text -->
+    <g transform="translate(320, 368)">
+      <!-- Outline/Glow for legibility against horse silhouette -->
+      <text x="0" y="0" 
+        font-family="'Brush Script MT', 'Palatino', 'Playfair Display', cursive, sans-serif" 
+        font-size="78" 
+        font-weight="900" 
+        font-style="italic" 
+        letter-spacing="5" 
+        fill="#121212" 
+        stroke="#deded6" 
+        stroke-width="6" 
+        paint-order="stroke fill" 
+        text-anchor="middle">
+        MBM
+      </text>
+    </g>
+
+    <!-- Right Horizontal Bar -->
+    <rect x="430" y="338" width="115" height="20" rx="3" fill="#121212" />
+  </g>
+</svg>
