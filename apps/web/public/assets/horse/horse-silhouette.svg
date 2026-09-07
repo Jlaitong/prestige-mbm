@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="horseGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#121212" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#121212" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="300" cy="300" r="280" fill="url(#horseGlow)"/>
+  <!-- Powerful charging horse silhouette -->
+  <path d="M480,180 C465,140 425,100 370,75 C315,50 260,65 220,105 C190,135 175,175 175,220 C145,205 115,220 100,250 C85,280 100,325 130,340 C145,370 175,415 220,460 C265,505 340,550 430,565 C385,490 370,430 385,385 C415,400 460,400 490,370 C535,325 535,250 505,190 Z" fill="#121212" opacity="0.88" />
+  <!-- Dynamic mane curves -->
+  <path d="M370,75 C350,110 320,130 280,140" stroke="#2a2a2a" stroke-width="4" fill="none"/>
+  <path d="M340,110 C320,145 290,165 250,175" stroke="#2a2a2a" stroke-width="4" fill="none"/>
+  <!-- Minimalist Brand Typography -->
+  <text x="300" y="585" fill="#121212" text-anchor="middle" font-family="'Montserrat', sans-serif" font-weight="900" font-style="italic" font-size="14" letter-spacing="6">PRESTIGE MBM • BOGOTÁ</text>
+</svg>

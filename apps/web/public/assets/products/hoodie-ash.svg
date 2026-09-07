@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a29" />
+      <stop offset="100%" stop-color="#191918" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="300" rx="20" fill="#dededb"/>
+  <!-- Hoodie silhouette -->
+  <path d="M60,90 L100,55 L150,70 L200,55 L240,90 L220,240 L80,240 Z" fill="url(#ashGrad)" />
+  <!-- Double hood lines -->
+  <path d="M120,65 C135,85 165,85 180,65" stroke="#121212" stroke-width="4" fill="none" />
+  <!-- Kangaroo pocket -->
+  <path d="M105,170 L195,170 L185,215 L115,215 Z" fill="#20201f" stroke="#333" stroke-width="2"/>
+  <!-- Typography stamp -->
+  <text x="150" y="140" fill="#777774" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="11" letter-spacing="4">PRESTIGE</text>
+  <text x="150" y="152" fill="#555" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="7" letter-spacing="2">200 GSM • BOGOTÁ</text>
+</svg>

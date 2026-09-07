@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-chalk: #E8E8E6;
+  --bg-surface: #F3F3F1;
+  --bg-card: #F9F9F7;
+  --obsidian: #121212;
+  --gray-muted: #6E6E6B;
+  --gray-border: rgba(18, 18, 18, 0.08);
+  --font-brand: 'Montserrat', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  overflow-wrap: break-word;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+body {
+  background-color: var(--bg-chalk);
+  color: var(--obsidian);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Subtle luxury grain texture overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Tipografía de marca */
+.font-brand {
+  font-family: var(--font-brand);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* Squircles y sombras orgánicas */
+.squircle-card {
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid var(--gray-border);
+  box-shadow: 0 14px 34px rgba(18, 18, 18, 0.04);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+}
+
+.squircle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(18, 18, 18, 0.08);
+  border-color: rgba(18, 18, 18, 0.16);
+}
+
+/* Custom range slider */
+input[type=range] {
+  accent-color: #121212;
+}
+
+/* Accessible focus outline */
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid #121212;
+  outline-offset: 2px;
+}

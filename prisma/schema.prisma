@@ -1,0 +1,165 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../apps/api/src/generated/client"
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  DISPATCHED
+  DELIVERED
+  CANCELLED
+}
+
+enum Role {
+  ADMIN
+  STAFF
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  slug        String    @unique
+  name        String
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id              String           @id @default(uuid())
+  slug            String           @unique
+  name            String
+  description     String
+  densityGsm      Int              @default(200)
+  price           Float
+  compareAtPrice  Float?
+  badge           String?
+  isAvailable     Boolean          @default(true)
+  isFeatured      Boolean          @default(false)
+  categorySlug    String
+  category        Category         @relation(fields: [categorySlug], references: [slug])
+  images          ProductImage[]
+  variants        ProductVariant[]
+  orderItems      OrderItem[]
+  atelierItems    AtelierItem[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model ProductImage {
+  id          String   @id @default(uuid())
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url         String
+  altText     String
+  isPrimary   Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProductVariant {
+  id          String      @id @default(uuid())
+  productId   String
+  product     Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size        String
+  color       String
+  sku         String      @unique
+  stock       Int         @default(10)
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Customer {
+  id          String   @id @default(uuid())
+  fullName    String
+  phone       String   @unique
+  email       String?
+  city        String   @default("Bogotá")
+  address     String?
+  orders      Order[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  orderNumber String      @unique // e.g. PBM-2026-000001
+  status      OrderStatus @default(PENDING)
+  subtotal    Float
+  total       Float
+  notes       String?
+  customerId  String
+  customer    Customer    @relation(fields: [customerId], references: [id])
+  items       OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model OrderItem {
+  id         String          @id @default(uuid())
+  orderId    String
+  order      Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product         @relation(fields: [productId], references: [id])
+  variantId  String?
+  variant    ProductVariant? @relation(fields: [variantId], references: [id])
+  quantity   Int             @default(1)
+  unitPrice  Float
+  subtotal   Float
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+}
+
+model AtelierLook {
+  id             String        @id @default(uuid())
+  key            String        @unique // e.g. night, cold, minimal
+  title          String
+  subtitle       String
+  description    String
+  price          Float
+  compareAtPrice Float
+  isPopular      Boolean       @default(false)
+  items          AtelierItem[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model AtelierItem {
+  id          String      @id @default(uuid())
+  lookId      String
+  look        AtelierLook @relation(fields: [lookId], references: [id], onDelete: Cascade)
+  productId   String?
+  product     Product?    @relation(fields: [productId], references: [id])
+  name        String
+  description String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  fullName  String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  details   String?
+  ipAddress String?
+  userId    String?
+  createdAt DateTime @default(now())
+}
