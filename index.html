@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRESTIGE MBM — Alta Presencia • Streetwear Bogotá</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tipografía Unificada: Montserrat 900 Black / Italic + Outfit para lectura secundaria -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Outfit:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-chalk: #e8e8e6;
+      --bg-surface: #f3f3f1;
+      --bg-card: #f9f9f7;
+      --obsidian: #121212;
+      --gray-muted: #6e6e6b;
+      --gray-border: rgba(18, 18, 18, 0.08);
+      --font-brand: 'Montserrat', sans-serif;
+      --font-text: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      overflow-wrap: break-word;
+    }
+
+    body {
+      background-color: var(--bg-chalk);
+      color: var(--obsidian);
+      font-family: var(--font-text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Tipografía Unificada de Marca */
+    .brand-font {
+      font-family: var(--font-brand);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-button-font {
+      font-family: var(--font-brand);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Canvas cinético con inercia a 60 FPS */
+    #kinetic-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.65;
+    }
+
+    .content-layer {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Squircles y sombras orgánicas */
+    .squircle-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      border: 1px solid var(--gray-border);
+      box-shadow: 0 14px 34px rgba(18, 18, 18, 0.04);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .squircle-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(18, 18, 18, 0.08);
+    }
+
+    /* Botón flotante permanente de WhatsApp */
+    .whatsapp-concierge-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9998;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #121212;
+      color: #e8e8e6;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .whatsapp-concierge-float:hover {
+      transform: scale(1.05) translateY(-2px);
+      background: #0d0d0d;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .status-dot-green {
+      width: 9px;
+      height: 9px;
+      background: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #25D366;
+      animation: pulse-green 2s infinite;
+    }
+
+    @keyframes pulse-green {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.3);
+        opacity: 0.7;
+      }
+    }
+
+    /* Slider de Ahorro Directo */
+    input[type=range] {
+      accent-color: #121212;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Lienzo interactivo para animaciones de inercia y silueta del caballo -->
+  <canvas id="kinetic-canvas"></canvas>
+
+  <!-- BOTÓN FLOTANTE PERMANENTE DE WHATSAPP -->
+  <aside class="whatsapp-concierge-float" onclick="openWhatsAppChat()">
+    <span class="status-dot-green"></span>
+    <span class="brand-button-font text-xs tracking-wider">CONCIERGE BOGOTÁ • WHATSAPP</span>
+    <svg class="w-5 h-5 fill-current text-[#25D366]" viewBox="0 0 24 24">
+      <path
+        d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.067-1.109-.067-.323-.105-.724-.249-1.258-.481-1.854-.803-3.056-2.677-3.148-2.8-.093-.124-.753-1.002-.753-1.912s.475-1.358.644-1.542c.169-.184.37-.23.493-.23.124 0 .248.002.355.006.113.004.263-.042.411.314.153.368.522 1.272.569 1.365.046.092.077.2.015.323-.062.123-.093.2-.185.308-.092.108-.195.241-.277.324-.093.092-.19.193-.082.378.108.184.478.788 1.026 1.276.705.628 1.299.822 1.484.914.185.093.293.078.4-.046.108-.123.462-.538.585-.723.124-.184.247-.154.416-.092.169.062 1.079.509 1.264.601.185.092.308.138.354.215.046.077.046.446-.098.851z" />
+    </svg>
+  </aside>
+
+  <div class="content-layer">
+
+    <!-- BARRA DE NAVEGACIÓN 100% FIJA (FIXED) -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-[9999] bg-[#e8e8e6]/90 backdrop-blur-xl border-b border-[rgba(18,18,18,0.08)] px-5 md:px-10 py-3.5 flex items-center justify-between transition-all">
+      <a href="#" class="flex items-center gap-3.5 group">
+        <!-- Logo Caballo PRESTIGE -->
+        <svg
+          class="w-10 h-10 fill-[#121212] transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3"
+          viewBox="0 0 200 200">
+          <path
+            d="M165,65 C160,50 145,35 125,25 C105,15 85,20 70,35 C60,45 55,60 55,75 C45,70 35,75 30,85 C25,95 30,110 40,115 C45,125 55,140 70,155 C85,170 110,185 140,190 C125,165 120,145 125,130 C135,135 150,135 160,125 C175,110 175,85 165,65 Z" />
+        </svg>
+        <div class="flex flex-col">
+          <span class="brand-font text-2xl tracking-tighter leading-none">PRESTIGE</span>
+          <div class="flex items-center gap-2 mt-0.5">
+            <span class="h-[2px] w-3 bg-[#121212]"></span>
+            <span class="brand-font text-[10px] tracking-[0.22em] text-[#121212]">MBM</span>
+            <span class="h-[2px] w-3 bg-[#121212]"></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Links de navegación de autor -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#catalogo" class="brand-button-font text-xs tracking-wider hover:opacity-70 transition-opacity">Drops
+          Disponibles</a>
+        <a href="#comparador"
+          class="brand-button-font text-xs tracking-wider hover:opacity-70 transition-opacity">Taller vs Mall</a>
+        <a href="#atelier" class="brand-button-font text-xs tracking-wider hover:opacity-70 transition-opacity">Atelier
+          Privé</a>
+      </div>
+
+      <!-- Trigger Carrito Cápsula -->
+      <button onclick="toggleDrawer(true)"
+        class="relative flex items-center gap-2.5 bg-[#121212] text-[#e8e8e6] px-4 py-2.5 rounded-full shadow-sm hover:scale-105 transition-transform">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path
+            d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z" />
+        </svg>
+        <span class="brand-button-font text-xs tracking-wider">BOLSA</span>
+        <span id="cart-pill-badge"
+          class="w-5 h-5 bg-[#e8e8e6] text-[#121212] rounded-full flex items-center justify-center font-bold text-[10px]">0</span>
+      </button>
+    </nav>
+
+    <!-- HERO DIRECTO, CEÑIDO Y SIN ESPACIOS VACÍOS -->
+    <header class="pt-24 md:pt-28 pb-12 px-5 md:px-10 max-w-7xl mx-auto">
+      <div class="mb-4">
+        <!-- Tagline técnico pegado arriba -->
+        <div
+          class="inline-flex items-center gap-2 bg-[#ffffff]/60 border border-[rgba(18,18,18,0.08)] px-3.5 py-1.5 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-[#121212]"></span>
+          <span class="brand-button-font text-[10px] tracking-widest text-[#444]">BODEGA CENTRAL BOGOTÁ • DESPACHO
+            INMEDIATO</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7">
+          <h1 class="brand-font text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.92] mb-5">
+            ALTA PRESENCIA.<br>
+            <span class="text-[#6e6e6b]">ACTITUD CAPITALINA.</span><br>
+            EXCLUSIVIDAD PURA.
+          </h1>
+
+          <p class="text-[#444] text-base md:text-lg max-w-xl mb-7 font-normal leading-relaxed">
+            Prendas de corte boxy y alta densidad textil (200 GSM) diseñadas para el ritmo de Bogotá. Eliminamos el 45%
+            de sobrecostos de centros comerciales para darte confección prémium directo de taller.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mb-8">
+            <a href="#catalogo"
+              class="brand-button-font text-xs tracking-wider bg-[#121212] text-[#e8e8e6] px-7 py-4 rounded-2xl hover:scale-105 transition-all shadow-md">
+              Explorar Drops
+            </a>
+            <a href="#comparador"
+              class="brand-button-font text-xs tracking-wider bg-[#ffffff]/70 border border-[#121212]/20 px-6 py-4 rounded-2xl hover:bg-[#ffffff] transition-all">
+              Simulador de Ahorro (-$120K)
+            </a>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-[rgba(18,18,18,0.08)]">
+            <div>
+              <span class="block text-[11px] uppercase tracking-wider text-[#777] font-semibold">Densidad</span>
+              <span class="brand-font text-xl md:text-2xl text-[#121212]">200 GSM</span>
+            </div>
+            <div>
+              <span class="block text-[11px] uppercase tracking-wider text-[#777] font-semibold">Entrega</span>
+              <span class="brand-font text-xl md:text-2xl text-[#121212]">24H Bogotá</span>
+            </div>
+            <div>
+              <span class="block text-[11px] uppercase tracking-wider text-[#777] font-semibold">Precio Taller</span>
+              <span class="brand-font text-xl md:text-2xl text-[#1b7a42]">$140.000 COP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta Hero Interactiva -->
+        <div class="lg:col-span-5">
+          <div class="squircle-card p-6 relative group overflow-hidden" id="hero-card-tilt">
+            <div
+              class="absolute top-5 left-5 z-10 bg-[#121212] text-[#e8e8e6] px-3.5 py-1.5 rounded-full brand-button-font text-[10px] tracking-wider">
+              PIEZA INSIGNIA • 200 GSM
+            </div>
+            <div class="w-full h-80 bg-[#dededb] rounded-2xl flex items-center justify-center overflow-hidden mb-5">
+              <svg class="w-64 h-64 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 200 200">
+                <path d="M40,65 L70,45 L100,55 L130,45 L160,65 L145,155 L55,155 Z" fill="#1b1b1b" />
+                <path d="M80,50 C90,62 110,62 120,50" stroke="#333" stroke-width="3" fill="none" />
+                <text x="100" y="115" fill="#888" text-anchor="middle" font-family="'Montserrat', sans-serif"
+                  font-weight="900" font-size="9" letter-spacing="3">PRESTIGE</text>
+              </svg>
+            </div>
+            <div class="flex justify-between items-end">
+              <div>
+                <h3 class="brand-font text-xl">Boxy Hoodie Black Shadow</h3>
+                <span class="text-xs text-[#777]">Confección de alto gramaje • Corte cuadrado</span>
+              </div>
+              <div class="text-right">
+                <span class="block text-xs line-through text-[#888]">$260.000 COP</span>
+                <span class="brand-font text-xl text-[#121212]">$140.000 COP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- COMPARADOR INTERACTIVO DE BODEGA EN BOGOTÁ (COMPACTO Y PRECISO A $140.000 COP) -->
+    <section class="px-5 md:px-10 max-w-5xl mx-auto my-12" id="comparador">
+      <div class="squircle-card p-6 md:p-8 bg-[#f5f5f3]">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+          <div>
+            <span class="brand-button-font text-[11px] tracking-widest text-[#777]">TRANSPARENCIA DE COSTOS</span>
+            <h2 class="brand-font text-2xl md:text-3xl mt-1">TALLER PRESTIGE VS. CENTRO COMERCIAL</h2>
+          </div>
+          <div class="bg-[#121212] text-[#e8e8e6] px-4 py-2 rounded-xl brand-button-font text-xs">
+            AHORRO REAL: -$120.000 COP / PRENDA
+          </div>
+        </div>
+
+        <!-- Slider dinámico -->
+        <div class="mb-6">
+          <div class="flex justify-between text-xs font-semibold mb-2">
+            <span>Simular cantidad de prendas:</span>
+            <span class="brand-font text-sm" id="units-label">1 PRENDA</span>
+          </div>
+          <input type="range" id="savings-slider" min="1" max="5" value="1"
+            class="w-full h-2 bg-[#d8d8d4] rounded-lg cursor-pointer">
+        </div>
+
+        <!-- Barras de Comparación en Vivo -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-5 rounded-2xl bg-[#ffffff] border border-[rgba(18,18,18,0.06)] flex flex-col justify-between">
+            <span class="text-xs uppercase tracking-wider text-[#888] font-bold">En Centro Comercial (Retail)</span>
+            <div class="my-3">
+              <span class="brand-font text-3xl text-[#777]" id="mall-cost">$260.000 COP</span>
+              <p class="text-xs text-[#888] mt-1">+ Costos de arriendo comercial, vitrina e intermediarios.</p>
+            </div>
+            <div class="w-full bg-[#eee] h-2.5 rounded-full overflow-hidden">
+              <div class="bg-[#888] h-full w-full"></div>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[#121212] text-[#e8e8e6] flex flex-col justify-between shadow-lg">
+            <div class="flex justify-between items-center">
+              <span class="text-xs uppercase tracking-wider text-[#aaa] font-bold">En PRESTIGE MBM (Taller)</span>
+              <span class="bg-[#1b7a42] text-[#fff] text-[10px] font-bold px-2.5 py-0.5 rounded-full">PRECIO
+                DIRECTO</span>
+            </div>
+            <div class="my-3">
+              <span class="brand-font text-3xl text-[#ffffff]" id="prestige-cost">$140.000 COP</span>
+              <p class="text-xs text-[#bbb] mt-1">Confección nacional pesada 200 GSM. Cero intermediarios.</p>
+            </div>
+            <div class="w-full bg-[#333] h-2.5 rounded-full overflow-hidden">
+              <div class="bg-[#25D366] h-full w-[54%]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATÁLOGO COMPLETO RESTAURADO (DROPS DISPONIBLES) -->
+    <section class="px-5 md:px-10 max-w-7xl mx-auto my-16" id="catalogo">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-5 mb-8">
+        <div>
+          <span class="brand-button-font text-xs tracking-widest text-[#777]">BODEGA CENTRAL BOGOTÁ</span>
+          <h2 class="brand-font text-3xl md:text-5xl mt-1">DROPS DISPONIBLES</h2>
+        </div>
+
+        <!-- Filtros Rápidos -->
+        <div class="flex flex-wrap gap-2">
+          <button
+            class="filter-chip active bg-[#121212] text-[#e8e8e6] px-4 py-2 rounded-full brand-button-font text-xs"
+            data-cat="all">Todos</button>
+          <button
+            class="filter-chip bg-[#ffffff] border border-[#121212]/15 px-4 py-2 rounded-full brand-button-font text-xs"
+            data-cat="hoodies">Hoodies & Jackets</button>
+          <button
+            class="filter-chip bg-[#ffffff] border border-[#121212]/15 px-4 py-2 rounded-full brand-button-font text-xs"
+            data-cat="tees">Tees Boxy</button>
+          <button
+            class="filter-chip bg-[#ffffff] border border-[#121212]/15 px-4 py-2 rounded-full brand-button-font text-xs"
+            data-cat="pantalones">Pantalones</button>
+        </div>
+      </div>
+
+      <!-- Grilla de Productos -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="catalog-grid">
+        <!-- Prenda 1 -->
+        <div class="squircle-card p-5 flex flex-col justify-between product-item" data-cat="hoodies">
+          <div>
+            <div
+              class="w-full h-64 bg-[#dededb] rounded-2xl flex items-center justify-center mb-4 relative overflow-hidden group">
+              <span
+                class="absolute top-3 left-3 bg-[#121212] text-[#fff] text-[9px] font-bold px-2 py-1 rounded-full">200
+                GSM</span>
+              <svg class="w-44 h-44 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 200 200">
+                <path d="M45,60 L70,40 L100,50 L130,40 L155,60 L140,150 L60,150 Z" fill="#222" />
+              </svg>
+            </div>
+            <h3 class="brand-font text-lg">Heavy Boxy Hoodie Ash</h3>
+            <span class="text-xs text-[#777] block mb-2">Felpa pesada 200 GSM • Tonalidad ceniza</span>
+            <div class="flex items-baseline gap-2 mb-3">
+              <span class="brand-font text-lg text-[#121212]">$140.000 COP</span>
+              <span class="text-xs line-through text-[#888]">$240.000</span>
+            </div>
+          </div>
+          <button onclick="addToBag('Heavy Boxy Hoodie Ash', 140000)"
+            class="w-full bg-[#121212] text-[#e8e8e6] py-3 rounded-xl brand-button-font text-xs hover:bg-[#2b2b2b] transition-colors">
+            Añadir a la Bolsa
+          </button>
+        </div>
+
+        <!-- Prenda 2 -->
+        <div class="squircle-card p-5 flex flex-col justify-between product-item" data-cat="tees">
+          <div>
+            <div
+              class="w-full h-64 bg-[#dededb] rounded-2xl flex items-center justify-center mb-4 relative overflow-hidden group">
+              <span
+                class="absolute top-3 left-3 bg-[#121212] text-[#fff] text-[9px] font-bold px-2 py-1 rounded-full">200
+                GSM</span>
+              <svg class="w-44 h-44 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 200 200">
+                <path d="M35,55 L65,35 L100,45 L135,35 L165,55 L150,155 L50,155 Z" fill="#2d2d2d" />
+              </svg>
+            </div>
+            <h3 class="brand-font text-lg">Boxy Tee Washed Black</h3>
+            <span class="text-xs text-[#777] block mb-2">Algodón peinado 200 GSM • Cuello cerrado</span>
+            <div class="flex items-baseline gap-2 mb-3">
+              <span class="brand-font text-lg text-[#121212]">$89.000 COP</span>
+              <span class="text-xs line-through text-[#888]">$145.000</span>
+            </div>
+          </div>
+          <button onclick="addToBag('Boxy Tee Washed Black', 89000)"
+            class="w-full bg-[#121212] text-[#e8e8e6] py-3 rounded-xl brand-button-font text-xs hover:bg-[#2b2b2b] transition-colors">
+            Añadir a la Bolsa
+          </button>
+        </div>
+
+        <!-- Prenda 3 -->
+        <div class="squircle-card p-5 flex flex-col justify-between product-item" data-cat="pantalones">
+          <div>
+            <div
+              class="w-full h-64 bg-[#dededb] rounded-2xl flex items-center justify-center mb-4 relative overflow-hidden group">
+              <span
+                class="absolute top-3 left-3 bg-[#121212] text-[#fff] text-[9px] font-bold px-2 py-1 rounded-full">DRIL
+                PESADO</span>
+              <svg class="w-44 h-44 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 200 200">
+                <path d="M50,25 L150,25 L140,175 L110,175 L100,70 L90,175 L60,175 Z" fill="#1e1e1e" />
+              </svg>
+            </div>
+            <h3 class="brand-font text-lg">Pantalón Cargo Wide-Leg</h3>
+            <span class="text-xs text-[#777] block mb-2">Bolsillos tácticos de fuelle • Corte ancho</span>
+            <div class="flex items-baseline gap-2 mb-3">
+              <span class="brand-font text-lg text-[#121212]">$155.000 COP</span>
+              <span class="text-xs line-through text-[#888]">$220.000</span>
+            </div>
+          </div>
+          <button onclick="addToBag('Pantalón Cargo Wide-Leg', 155000)"
+            class="w-full bg-[#121212] text-[#e8e8e6] py-3 rounded-xl brand-button-font text-xs hover:bg-[#2b2b2b] transition-colors">
+            Añadir a la Bolsa
+          </button>
+        </div>
+
+        <!-- Prenda 4 -->
+        <div class="squircle-card p-5 flex flex-col justify-between product-item" data-cat="hoodies">
+          <div>
+            <div
+              class="w-full h-64 bg-[#dededb] rounded-2xl flex items-center justify-center mb-4 relative overflow-hidden group">
+              <span
+                class="absolute top-3 left-3 bg-[#121212] text-[#fff] text-[9px] font-bold px-2 py-1 rounded-full">EDICIÓN
+                LUXE</span>
+              <svg class="w-44 h-44 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 200 200">
+                <path d="M40,55 L70,35 L100,45 L130,35 L160,55 L150,150 L50,150 Z" fill="#141414" />
+              </svg>
+            </div>
+            <h3 class="brand-font text-lg">Biker Jacket Matte Finish</h3>
+            <span class="text-xs text-[#777] block mb-2">Estructura rígida mate • Cremallera metálica</span>
+            <div class="flex items-baseline gap-2 mb-3">
+              <span class="brand-font text-lg text-[#121212]">$210.000 COP</span>
+              <span class="text-xs line-through text-[#888]">$310.000</span>
+            </div>
+          </div>
+          <button onclick="addToBag('Biker Jacket Matte Finish', 210000)"
+            class="w-full bg-[#121212] text-[#e8e8e6] py-3 rounded-xl brand-button-font text-xs hover:bg-[#2b2b2b] transition-colors">
+            Añadir a la Bolsa
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN ATELIER PRIVÉ MBM (ASESORÍA DE ARMARIO) -->
+    <section class="px-5 md:px-10 max-w-7xl mx-auto my-20" id="atelier">
+      <div class="squircle-card p-8 md:p-12 bg-[#ffffff] border border-[rgba(18,18,18,0.08)]">
+        <div class="max-w-2xl mb-8">
+          <span class="brand-button-font text-xs tracking-widest text-[#777]">ASESORÍA PRIVADA DE VESTUARIO</span>
+          <h2 class="brand-font text-3xl md:text-4xl mt-1">ATELIER PRIVÉ MBM</h2>
+          <p class="text-[#555] text-sm mt-2">Selecciona la ocasión en Bogotá y configuramos tu conjunto coordinado con
+            descuento preferencial directo a tu bolsa.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 flex flex-col gap-3">
+            <button onclick="setAtelierCombo('night')"
+              class="atelier-btn active p-4 rounded-2xl border text-left flex justify-between items-center transition-all bg-[#121212] text-[#e8e8e6] border-[#121212]">
+              <div>
+                <span class="brand-font text-base block">01 • Noche Zona Rosa</span>
+                <span class="text-xs opacity-75">Biker Jacket Matte + Pantalón Sastre Wide</span>
+              </div>
+              <span class="brand-font text-sm">$320.000 COP</span>
+            </button>
+
+            <button onclick="setAtelierCombo('cold')"
+              class="atelier-btn p-4 rounded-2xl border text-left flex justify-between items-center transition-all bg-[#f7f7f5] text-[#121212] border-[rgba(18,18,18,0.08)] hover:bg-[#eee]">
+              <div>
+                <span class="brand-font text-base block">02 • Clima Frío Diario 200 GSM</span>
+                <span class="text-xs text-[#777]">Heavy Hoodie Ash + Cargo Táctico</span>
+              </div>
+              <span class="brand-font text-sm">$270.000 COP</span>
+            </button>
+
+            <button onclick="setAtelierCombo('minimal')"
+              class="atelier-btn p-4 rounded-2xl border text-left flex justify-between items-center transition-all bg-[#f7f7f5] text-[#121212] border-[rgba(18,18,18,0.08)] hover:bg-[#eee]">
+              <div>
+                <span class="brand-font text-base block">03 • Minimal Boxy Puro</span>
+                <span class="text-xs text-[#777]">Boxy Tee Washed + Cargo Wide</span>
+              </div>
+              <span class="brand-font text-sm">$220.000 COP</span>
+            </button>
+          </div>
+
+          <div
+            class="lg:col-span-6 p-6 rounded-2xl bg-[#f5f5f3] border border-[rgba(18,18,18,0.06)] flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="brand-button-font text-[10px] tracking-widest text-[#777]">LOOK COORDINADO</span>
+                <span class="bg-[#1b7a42] text-[#fff] brand-button-font text-[9px] px-2.5 py-1 rounded-full">AHORRO EN
+                  CONJUNTO</span>
+              </div>
+              <h3 class="brand-font text-2xl" id="combo-display-title">Noche Zona Rosa</h3>
+              <p class="text-xs text-[#666] mt-1" id="combo-display-desc">Dos piezas estructuradas para el frío bogotano
+                y la vida nocturna.</p>
+              <div class="my-4 pt-3 border-t border-[rgba(18,18,18,0.08)]">
+                <span class="text-xs text-[#888] block">Inversión del combo completo:</span>
+                <span class="brand-font text-3xl text-[#121212]" id="combo-display-price">$320.000 COP</span>
+              </div>
+            </div>
+            <button onclick="addCurrentCombo()"
+              class="w-full bg-[#121212] text-[#e8e8e6] py-3.5 rounded-xl brand-button-font text-xs hover:scale-[1.02] transition-transform">
+              Añadir Conjunto Completo a la Bolsa
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER Y MANIFIESTO DE EXCLUSIVIDAD -->
+    <footer class="bg-[#121212] text-[#e8e8e6] pt-16 pb-12 px-5 md:px-10 mt-24">
+      <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+        <!-- Isotipo Caballo -->
+        <svg class="w-12 h-12 fill-[#e8e8e6] mb-3" viewBox="0 0 200 200">
+          <path
+            d="M165,65 C160,50 145,35 125,25 C105,15 85,20 70,35 C60,45 55,60 55,75 C45,70 35,75 30,85 C25,95 30,110 40,115 C45,125 55,140 70,155 C85,170 110,185 140,190 C125,165 120,145 125,130 C135,135 150,135 160,125 C175,110 175,85 165,65 Z" />
+        </svg>
+        <span class="brand-font text-3xl tracking-tighter">PRESTIGE</span>
+        <span class="brand-font text-xs tracking-[0.3em] text-[#888] mt-0.5">MBM</span>
+
+        <!-- Frase de exclusividad solicitada -->
+        <p class="brand-font text-xl md:text-2xl text-[#f0f0ee] max-w-2xl my-8 leading-snug">
+          “LA VERDADERA EXCLUSIVIDAD NO ES PAGAR DE MÁS POR UN LOGO; ES PORTAR UNA PRESENCIA QUE NADIE MÁS PUEDE
+          COMPRAR.”
+        </p>
+
+        <!-- Canales Oficiales Solicitados -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
+          <a href="https://www.tiktok.com/@prestigembm?_r=1&_t=ZS-99NtA6PjWbt" target="_blank" rel="noopener noreferrer"
+            class="brand-button-font text-[11px] px-5 py-2.5 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all">
+            TikTok @prestigembm ↗
+          </a>
+          <a href="https://www.instagram.com/prestigembm?igsi=MTl3cWVmYXN0cHR0bQ%3D%3D&utm_source=qr" target="_blank"
+            rel="noopener noreferrer"
+            class="brand-button-font text-[11px] px-5 py-2.5 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all">
+            Instagram @prestigembm ↗
+          </a>
+        </div>
+
+        <div
+          class="w-full pt-6 border-t border-white/10 text-xs text-[#777] flex flex-col sm:flex-row justify-between items-center gap-3">
+          <span>© 2026 PRESTIGE MBM. Bogotá D.C., Colombia.</span>
+          <span>Despachos a todo el país • Pagos Nequi / PSE / Transferencia</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- DRAWER DESLIZABLE DE LA BOLSA DE COMPRAS -->
+  <div id="drawer-backdrop" onclick="toggleDrawer(false)"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[10000] opacity-0 pointer-events-none transition-opacity duration-300">
+  </div>
+  <aside id="cart-drawer"
+    class="fixed top-0 right-0 h-full w-full max-w-md bg-[#f7f7f5] z-[10001] shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col p-6">
+    <div class="flex justify-between items-center pb-4 border-b border-[rgba(18,18,18,0.08)]">
+      <span class="brand-font text-xl">Bolsa de Pedidos</span>
+      <button onclick="toggleDrawer(false)" class="p-2 text-xl font-bold text-[#121212]">✕</button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto py-4 flex flex-col gap-3" id="cart-list">
+      <div class="text-center text-[#888] text-sm my-auto font-medium">Tu bolsa de compras está vacía.</div>
+    </div>
+
+    <div class="pt-4 border-t border-[rgba(18,18,18,0.08)] flex flex-col gap-3">
+      <div class="flex justify-between items-baseline">
+        <span class="brand-font text-sm">TOTAL:</span>
+        <span class="brand-font text-2xl text-[#121212]" id="cart-total-val">$0 COP</span>
+      </div>
+      <button onclick="checkoutViaWhatsApp()"
+        class="w-full bg-[#121212] text-[#e8e8e6] py-4 rounded-xl brand-button-font text-xs hover:bg-[#222] transition-colors shadow-lg">
+        Confirmar Pedido por WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- SCRIPT DE ANIMACIONES CINÉTICAS A 60 FPS Y CARRITO -->
+  <script>
+    // ESTADO
+    let cart = [];
+    let currentCombo = {
+      title: "Noche Zona Rosa",
+      price: 320000,
+      desc: "Biker Jacket Matte + Pantalón Sastre Wide"
+    };
+
+    // 1. LIENZO CINÉTICO (Canvas 60 FPS con Inercia)
+    const canvas = document.getElementById('kinetic-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let scrollY = 0;
+    let targetScrollY = 0;
+    let mouseX = 0, mouseY = 0;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    window.addEventListener('scroll', () => {
+      targetScrollY = window.scrollY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / width - 0.5) * 35;
+      mouseY = (e.clientY / height - 0.5) * 35;
+    });
+
+    function loop() {
+      scrollY += (targetScrollY - scrollY) * 0.08;
+      ctx.clearRect(0, 0, width, height);
+
+      // Silueta translúcida del caballo reaccionando al scroll
+      ctx.save();
+      const posX = width * 0.78 + mouseX;
+      const posY = height * 0.45 - (scrollY * 0.22) + mouseY;
+      ctx.translate(posX, posY);
+      ctx.rotate((scrollY * 0.0003) - 0.04);
+      ctx.fillStyle = "rgba(18, 18, 18, 0.035)";
+
+      // Dibujo geométrico
+      ctx.beginPath();
+      ctx.arc(0, 0, 150, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    // 2. SLIDER DE AHORRO DINÁMICO
+    const slider = document.getElementById('savings-slider');
+    const unitsLabel = document.getElementById('units-label');
+    const mallCost = document.getElementById('mall-cost');
+    const prestigeCost = document.getElementById('prestige-cost');
+
+    slider.addEventListener('input', (e) => {
+      const val = parseInt(e.target.value);
+      unitsLabel.innerText = `${val} ${val === 1 ? 'PRENDA' : 'PRENDAS'}`;
+      mallCost.innerText = `$${(val * 260000).toLocaleString('es-CO')} COP`;
+      prestigeCost.innerText = `$${(val * 140000).toLocaleString('es-CO')} COP`;
+    });
+
+    // 3. CARRITO & WHATSAPP
+    function toggleDrawer(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+      if (open) {
+        drawer.classList.remove('translate-x-full');
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+      } else {
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+      }
+    }
+
+    function addToBag(name, price) {
+      cart.push({ name, price });
+      renderCart();
+      toggleDrawer(true);
+    }
+
+    function removeCartItem(idx) {
+      cart.splice(idx, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      document.getElementById('cart-pill-badge').innerText = cart.length;
+      const list = document.getElementById('cart-list');
+      const totalEl = document.getElementById('cart-total-val');
+
+      if (cart.length === 0) {
+        list.innerHTML = `<div class="text-center text-[#888] text-sm my-auto font-medium">Tu bolsa de compras está vacía.</div>`;
+        totalEl.innerText = "$0 COP";
+        return;
+      }
+
+      let total = 0;
+      list.innerHTML = '';
+      cart.forEach((item, i) => {
+        total += item.price;
+        const row = document.createElement('div');
+        row.className = "flex justify-between items-center p-3.5 bg-white rounded-xl border border-[rgba(18,18,18,0.06)]";
+        row.innerHTML = `
+          <div>
+            <span class="brand-font text-xs block">${item.name}</span>
+            <span class="text-xs text-[#777]">$${item.price.toLocaleString('es-CO')} COP</span>
+          </div>
+          <button onclick="removeCartItem(${i})" class="text-xs text-red-500 font-bold hover:underline">Quitar</button>
+        `;
+        list.appendChild(row);
+      });
+
+      totalEl.innerText = `$${total.toLocaleString('es-CO')} COP`;
+    }
+
+    // 4. ATELIER
+    function setAtelierCombo(type) {
+      document.querySelectorAll('.atelier-btn').forEach(b => {
+        b.classList.remove('bg-[#121212]', 'text-[#e8e8e6]', 'border-[#121212]');
+        b.classList.add('bg-[#f7f7f5]', 'text-[#121212]');
+      });
+      event.currentTarget.classList.add('bg-[#121212]', 'text-[#e8e8e6]', 'border-[#121212]');
+
+      if (type === 'night') {
+        currentCombo = { title: "Noche Zona Rosa", price: 320000, desc: "Biker Jacket Matte + Pantalón Sastre Wide" };
+      } else if (type === 'cold') {
+        currentCombo = { title: "Clima Frío Diario 200 GSM", price: 270000, desc: "Heavy Hoodie Ash + Cargo Táctico" };
+      } else {
+        currentCombo = { title: "Minimal Boxy Puro", price: 220000, desc: "Boxy Tee Washed + Cargo Wide" };
+      }
+
+      document.getElementById('combo-display-title').innerText = currentCombo.title;
+      document.getElementById('combo-display-desc').innerText = currentCombo.desc;
+      document.getElementById('combo-display-price').innerText = `$${currentCombo.price.toLocaleString('es-CO')} COP`;
+    }
+
+    function addCurrentCombo() {
+      addToBag(`Combo: ${currentCombo.title}`, currentCombo.price);
+    }
+
+    // 5. CHECKOUT DIRECTO
+    function checkoutViaWhatsApp() {
+      if (cart.length === 0) return alert('Por favor añade una prenda a la bolsa.');
+      let total = 0;
+      let itemsList = cart.map((c, i) => {
+        total += c.price;
+        return `${i + 1}. ${c.name} ($${c.price.toLocaleString('es-CO')} COP)`;
+      }).join('%0A');
+
+      const msg = `Hola PRESTIGE MBM, quiero ordenar mi pedido desde la tienda oficial:%0A%0A${itemsList}%0A%0ATotal: $${total.toLocaleString('es-CO')} COP%0ACiudad: Bogotá / Colombia.`;
+      window.open(`https://wa.me/573000000000?text=${msg}`, '_blank');
+    }
+
+    function openWhatsAppChat() {
+      const msg = encodeURIComponent("Hola PRESTIGE MBM, tengo una consulta sobre las prendas 200 GSM y entregas en Bogotá.");
+      window.open(`https://wa.me/573000000000?text=${msg}`, '_blank');
+    }
+
+    // Filtros de Catálogo
+    document.querySelectorAll('.filter-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-chip').forEach(b => {
+          b.classList.remove('bg-[#121212]', 'text-[#e8e8e6]');
+          b.classList.add('bg-[#ffffff]', 'text-[#121212]');
+        });
+        btn.classList.add('bg-[#121212]', 'text-[#e8e8e6]');
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.product-item').forEach(p => {
+          if (cat === 'all' || p.dataset.cat === cat) {
+            p.style.display = 'flex';
+          } else {
+            p.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
